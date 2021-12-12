@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-//export const Input = styled.
 
 export const Input = ({label, name, ...rest}) => {
 
@@ -19,7 +18,6 @@ const InputContainer = styled.div`
 	display: inline-block;
 	position: relative;
 	width: 100%;
-	margin: 5px;
 
 `
 

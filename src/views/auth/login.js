@@ -8,7 +8,7 @@ import {userActions} from '../../_actions'
 import {useDispatch} from 'react-redux'
 import {useSelector} from 'react-redux'
 
-export default function LoginForm({showLogin}){
+export default function LoginForm({showLogin, rest}){
 	const [form,setForm] = useState({
 		username: '',
 		password: ''
@@ -25,7 +25,7 @@ export default function LoginForm({showLogin}){
 
 	}
 	return (
-		<ModalForm show={showLogin} className='transform'>
+		<ModalForm show={showLogin} className='transform' {...rest}>
 			<Row>
 				<h2>Login</h2>
 			</Row>

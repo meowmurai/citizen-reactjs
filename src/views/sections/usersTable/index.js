@@ -5,6 +5,7 @@ import { userActions } from '../../../_actions'
 
 import {LoadingButton} from '../../../components/buttons'
 import {Input} from '../../../components/inputs'
+import { Toggle } from '../../../components/toggle'
 
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
 import { Grid } from '../../../components/containers'
@@ -24,6 +25,7 @@ export default function UsersTable(){
 	const [defaultUsername, setDefaultUsername] = useState('')
 	const [addForm, setAddForm] = useState({
 		username: '',
+		email: '',
 		password: ''
 	})
 	const users = useSelector(state => state.users.items)
@@ -54,18 +56,27 @@ export default function UsersTable(){
 	}
 	return (
 		<div style={{position: 'relative'}}>
-		<Overlay show={showForm} onClick={()=>setShowForm(!showForm)}/>
-		<ModalForm show={showForm} className='appear'>
-			<Row>
-				<h2>Create Account</h2>
+		<Overlay show={showForm} onClick={()=>setShowForm(!showForm)} style={{'z-index': '2'}}/>
+		<ModalForm show={showForm} className='appear' width='400px' style={{'z-index': '2'}}>
+			<Row style={{'flex-direction': 'column'}}>
+				<h2 style={{margin: '0', 'text-align': 'center'}}>Create account</h2>
+			</Row>
+			<Row style={{'justify-content': 'space-between', 'flex-wrap': 'wrap', 'margin': '10px 15px'}}>
+				<span>for</span>
+				<Toggle ></Toggle>
+				<div style={{width: '100%'}}/>
+				<span style={{'display': 'block'}}>
+					username: 
+				</span>
+				<span>{defaultUsername}</span>
 			</Row>
 			<Row>
-				<Input label='username' name='username' onChange={handleChange} value={defaultUsername} required disabled/>
+				<Input label='email' name='email' onChange={handleChange} required/>
 			</Row>
 			<Row>
 				<Input label='password' name='password' onChange={handleChange} type='password' required/>
 			</Row>
-			<Row>
+			<Row style={{'justify-content': 'center'}}>
 				<LoadingButton loading={loading} variant='contained' onClick={handleSubmit}>Create</LoadingButton>
 			</Row>
 		</ModalForm>

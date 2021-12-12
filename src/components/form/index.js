@@ -13,7 +13,7 @@ const Container = styled.div`
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 30%;
+	width: 40%;
 	min-width: 300px;
 	height: 0;
 	z-index: 10;
@@ -35,6 +35,9 @@ const FormWrapper = styled.div`
 	border-radius: 10px;
 	padding: 16px;
 	transition: 0.2s all ease-in-out;
+	@media screen and (max-width: 768px){
+		padding: 4px;
+	}
 	@keyframes transform{
 		0%{top: -500px;}
 		100%{top: 100px;}
@@ -47,7 +50,7 @@ const FormWrapper = styled.div`
 		${({show}) => show ? `animation: transform` : `top: -800px`}
 	}
 	&.appear{
-		${({show}) => show ? `animation: appear` : `opacity: 0`}
+		${({show}) => show ? `display: flex;animation: appear` : `display: none`}
 	}
 	
 `
@@ -56,16 +59,19 @@ export const Row = styled.div`
 	width: 80%;
 	margin: 10px;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
+	align-items: center;
 `
+
 
 export const ModalForm = ({
 	children,
 	show,
+	width,
 	...rest
 }) => {
 	return (
-		<Container>
+		<Container width={width}>
 			<FormWrapper show={show} {...rest}>
 				{children}
 			</FormWrapper>

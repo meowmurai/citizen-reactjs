@@ -19,7 +19,9 @@ export const theme = {
     red: '#F87F81',
     black: '#121029',
     gray: '#2e3138',
-    backColor: '#e6e4eb'
+    backColor: '#e6e4eb',
+    pink: '#FF6396',
+    blue: '#3CA2C8'
   },
   spacing: {
     container_gutter_lg : '160px',

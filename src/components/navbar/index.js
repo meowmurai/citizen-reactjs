@@ -98,8 +98,8 @@ const Navbar = () => {
 					<NavItem><NavLink to='/contac'>Contact</NavLink></NavItem>
 				</NavMenu>
 			</Nav>
-			<Overlay show={showLogin} onClick={()=>setShowLogin(false)}/>
-			<LoginForm showLogin={showLogin}/>
+			<Overlay show={showLogin} onClick={()=>setShowLogin(false)} style={{'z-index': '10'}}/>
+			<LoginForm showLogin={showLogin} style={{'z-index': '10'}}/>
 		</>
 	)
 }

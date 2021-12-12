@@ -27,9 +27,6 @@ export const Grid = styled.div`
 	}
 `
 
-export const Box = styled.div`
-	${props => ({...props})};
-`
 export const OuterContainer = styled.div`
 	padding: 0 ${props => props.theme.spacing.container_gutter_sm};
 	@media screen and (min-width: 768px){
