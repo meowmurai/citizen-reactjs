@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import {ModalForm, Row} from '../../components/form'
-import {Input} from '../../components/inputs'
-import {LoadingButton} from '../../components/buttons'
+import {ModalForm, Row} from '../../_components/form'
+import {Input} from '../../_components/inputs'
+import {LoadingButton} from '../../_components/buttons'
 import {userActions} from '../../_actions'
 import {useDispatch} from 'react-redux'
 import {useSelector} from 'react-redux'

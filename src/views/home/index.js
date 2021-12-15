@@ -5,10 +5,10 @@ import { userActions } from '../../_actions'
 
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
 
-import { Grid } from '../../components/containers'
-import {LoadingButton} from '../../components/buttons'
-import { Button } from '../../components/buttons'
-import {Input} from '../../components/inputs'
+import { Grid } from '../../_components/containers'
+import {LoadingButton} from '../../_components/buttons'
+import { Button } from '../../_components/buttons'
+import {Input} from '../../_components/inputs'
 
 import UsersTable from '../sections/usersTable'
 

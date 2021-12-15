@@ -4,3 +4,18 @@
 body{
 	background-color: #f9f7fd;
 }
+@media screen and (max-width:  600px){
+	html{
+		font-size: 0.8rem;
+	}
+}
+@media screen and (max-width:  780px){
+	html{
+		font-size: 0.9rem;
+	}
+}
+@media screen and (min-width:  1280px){
+	html{
+		font-size: 1rem;
+	}
+}

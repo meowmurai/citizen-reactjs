@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Navbar from '../navbar'
+import Navbar from '../../_components/navbar'
 
 export default function Header(){
 	return(

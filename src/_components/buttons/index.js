@@ -2,14 +2,18 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+const ChildWrapper = styled.span`
+	display: inline-block;
+	white-space: nowrap;
+`
 const StyledButton = styled.button`
 	all: unset;
 	cursor: pointer;
 	position: relative;
-	border-radius: 5px;
+	display: inline-block;
+	border-radius: 10px;
 	padding: 8px 24px;
 	border: 0px;
-	overflow: hidden;
 	box-shadow: 5px 5px 10px #E5E5E5;
 	background-color: ${props => props.bgcolor === 'secondary' ? props.theme.palete.secondary.main :
 															   props.theme.palete.primary.main};
@@ -34,7 +38,15 @@ const StyledButton = styled.button`
 		}
 	` : ''};
 	${props => ({...props.sx})};
-`
+	@media screen and (max-width: 768px){
+		i + span{
+			display: none;
+		}
+	}
+	@media screen and (max-width: 1024px){
+		padding: 4px 12px;
+	}
+`	
 const ContainedButton = styled(StyledButton)`
 	&:hover:after{
 		opacity: 0.3;
@@ -57,6 +69,13 @@ const TextButton = styled(StyledButton)`
 		transition: 0.3s all ease-in-out;
 	}
 `		
+export const IconButton = styled(StyledButton)`
+	background-color: transparent;
+	padding: 2px 4px;
+	border: none;
+	box-shadow: none;
+	color: ${props => props.color ? props.color : '#8f8f8f'}
+`
 export const LoadingButton = ({variant, loading, children, ...rest}) => {
 	return (
 		<>
@@ -79,9 +98,9 @@ export const LoadingButton = ({variant, loading, children, ...rest}) => {
 export const Button = ({variant, children, ...rest}) => {
 	return (
 		<>
-			{variant === 'contained' ? 	<ContainedButton {...rest}>{children}</ContainedButton> : 
-			 variant === 'outlined' ? 	<OutlinedButton {...rest}>{children}</OutlinedButton> :
-			 							<TextButton {...rest}>{children}</TextButton> 
+			{variant === 'contained' ? 	<ContainedButton {...rest}><ChildWrapper>{children}</ChildWrapper></ContainedButton> : 
+			 variant === 'outlined' ? 	<OutlinedButton {...rest}><ChildWrapper>{children}</ChildWrapper></OutlinedButton> :
+			 							<TextButton {...rest}><ChildWrapper>{children}</ChildWrapper></TextButton> 
 			}
 		</>
 	)

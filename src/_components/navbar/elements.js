@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import {OuterContainer} from '../containers'
+import {OuterContainer, Grid} from '../containers'
 
 export const Nav = styled.nav`
 	width: 100%;

@@ -5,7 +5,8 @@ import { alertActions } from './';
 export const userActions = {
     login,
     logout,
-    getChilds
+    getChildsUser,
+    getChildsAll
 };
 
 function login(username, password, onSuccess) {
@@ -16,6 +17,7 @@ function login(username, password, onSuccess) {
             .then(
                 user => {
                     dispatch(success(user))
+                    dispatch(alertActions.success('login succeed'))
                     onSuccess()
                 },
                 error => {
@@ -36,11 +38,26 @@ function logout() {
     return { type: userConstants.LOGOUT };
 }
 
-function getChilds() {
+function getChildsUser() {
     return dispatch => {
         dispatch(request());
 
-        userService.getChilds()
+        userService.getChildsUser()
+            .then(
+                users => dispatch(success(users)),
+                error => dispatch(failure(error))
+            )
+    };
+
+    function request() { return { type: userConstants.GETCHILDS_REQUEST } }
+    function success(users) { return { type: userConstants.GETCHILDS_SUCCESS, users } }
+    function failure(error) { return { type: userConstants.GETCHILDS_FAILURE, error } }
+}
+function getChildsAll() {
+    return dispatch => {
+        dispatch(request());
+
+        userService.getChildsAll()
             .then(
                 users => dispatch(success(users)),
                 error => dispatch(failure(error))

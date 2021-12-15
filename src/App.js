@@ -4,11 +4,11 @@ import {GlobalStyle,theme} from './globalStyle'
 import { ThemeProvider } from 'styled-components'
 
 
-import Header from './components/header'
+import Header from './views/header'
 import Landing from './views/landing'
 import Home from './views/home'
-
-import Navbar from './components/navbar'
+import Users from './views/users'
+import Notification from './views/notification'
 
 function App() {
   return (
@@ -16,11 +16,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle/>
         <Router>
-          <Header/>
-          <Routes>
-            <Route path='/' element={<Landing/>}/>
-            <Route path='/home' element={<Home/>}/>
-          </Routes>
+            <Notification/>
+            <Header/>
+            <Routes>
+                <Route path='/' element={<Landing/>}/>
+                <Route path='/home'>
+                    <Route path='/home/users' element={<Users/>}/>
+                    {/*<Route path='/home/manages'>
+                        <Route path='/home/manages/users' element={<Users/>}/>
+                    </Route>*/}
+                </Route>
+            </Routes>
         </Router>
        </ThemeProvider>
     </div>

@@ -4,7 +4,8 @@ import { authHeader } from '../_helpers';
 export const userService = {
     login,
     logout,
-    getChilds
+    getChildsUser,
+    getChildsAll
 };
 
 function login(username, password) {
@@ -14,7 +15,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`${env.apiUrl}/v1/login`, requestOptions)
+    return fetch(`${env.apiUrl}/login`, requestOptions)
         .then(handleResponse)
         .then(messages => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -30,13 +31,25 @@ function logout() {
     
 }
 
-function getChilds() {
+function getChildsUser() {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-    return fetch(`${env.apiUrl}/v1/user/childs/all`, requestOptions)
+    return fetch(`${env.userApiUrl}/childs/user`, requestOptions)
+            .then(handleResponse)
+            .then(messages => {
+                return messages.data
+            })
+}
+function getChildsAll() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${env.userApiUrl}/childs/all`, requestOptions)
             .then(handleResponse)
             .then(messages => {
                 return messages.data
@@ -48,7 +61,7 @@ function create() {
         headers: authHeader()
     };
 
-    return fetch(`${env.apiUrl}/v1/user/childs/all`, requestOptions)
+    return fetch(`${env.userApiUrl}/childs/all`, requestOptions)
             .then(handleResponse)
             .then(messages => {
                 return messages.data

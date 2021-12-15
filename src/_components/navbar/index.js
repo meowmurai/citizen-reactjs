@@ -7,7 +7,7 @@ import { userActions } from '../../_actions'
 import LoginForm from '../../views/auth/login'
 import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLink, Empty, AvatarContainer, DropDown, DropDownItem} from './elements'
 import {Button, LoadingButton} from '../buttons'
-import {Input} from '../inputs'
+import {Input, Search} from '../inputs'
 import {Overlay} from '../overlay'
 import {FaBars} from 'react-icons/fa'
 
@@ -57,7 +57,11 @@ const Navbar = () => {
 	const logout = () => {
 		dispatch(userActions.logout())
 	}
-
+	const handleSearchKey = (e) =>{
+		if(e.key === 'Enter'){
+			
+		}
+	}
 	return (
 		<>
 			<Nav ref={ref}>
@@ -70,6 +74,7 @@ const Navbar = () => {
 							Citizen
 						</NavLink>
 					</NavLogo>
+					<Search onKeyDown={handleSearchKey} placeholder='type to search' containerSX={{'flex-basis': '50%'}} inputSX={{'box-shadow': 'none'}}/>
 					<AvatarContainer>
 						{ authState.user && !authState.loading ?
 							<>
@@ -93,9 +98,9 @@ const Navbar = () => {
 					</AvatarContainer>
 				</NavbarContainer>
 				<NavMenu show={menuToggle}>
-					<NavItem><NavLink to='/home'>Home</NavLink></NavItem>
-					<NavItem><NavLink to='/about'>About</NavLink></NavItem>
-					<NavItem><NavLink to='/contac'>Contact</NavLink></NavItem>
+					<NavItem><NavLink to='/home/users'>Manage users</NavLink></NavItem>
+					<NavItem><NavLink to='/account'>Account</NavLink></NavItem>
+
 				</NavMenu>
 			</Nav>
 			<Overlay show={showLogin} onClick={()=>setShowLogin(false)} style={{'z-index': '10'}}/>

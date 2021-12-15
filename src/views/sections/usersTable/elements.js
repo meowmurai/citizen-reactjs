@@ -30,4 +30,15 @@ export const Table = styled.table`
   	th:first-child, td:first-child{
   		padding-left: 1.5rem;
   	}
+  	th:last-child, td:last-child{
+  		padding-right: ${props => props.theme.spacing.context_gutter_md};
+  	}
+  	@media screen and (max-width: 768px){
+  		th:first-child, td:first-child{
+	  		padding-left: 1rem;
+  		}
+  		th:last-child, td:last-child{
+	  		padding-right: ${props => props.theme.spacing.context_gutter_sm};
+	  	}
+  	}
 `

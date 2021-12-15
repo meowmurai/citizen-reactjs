@@ -13,17 +13,16 @@ export const Grid = styled.div`
 
 	flex-direction: ${props => props.flexDirection ? props.flexDirection : 'row'};
 
-	width: 100%;
 	${props => ({...props.sx})};
 	@media screen and (max-width: 768px){
 		padding: 0;
-		width: ${props => props.sm ? `${props.sm/12*100}%` : 'auto'};
+		flex-basis: ${props => props.sm ? `${props.sm/12*100}%` : 'auto'};
 	}
 	@media screen and (min-width: 768px){
-		width: ${props => props.md ? `${props.md/12*100}%` : 'auto'};
+		flex-basis: ${props => props.md ? `${props.md/12*100}%` : 'auto'};
 	}
 	@media screen and (min-width: 1280px){
-		width: ${props => props.lg ? `${props.lg/12*100}%` : 'auto'};
+		flex-basis: ${props => props.lg ? `${props.lg/12*100}%` : 'auto'};
 	}
 `
 

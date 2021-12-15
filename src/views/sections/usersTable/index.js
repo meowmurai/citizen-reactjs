@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { userActions } from '../../../_actions'
 
-import {LoadingButton} from '../../../components/buttons'
-import {Input} from '../../../components/inputs'
-import { Toggle } from '../../../components/toggle'
+import {LoadingButton} from '../../../_components/buttons'
+import {Input} from '../../../_components/inputs'
+import { Toggle } from '../../../_components/toggle'
 
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
-import { Grid } from '../../../components/containers'
-import { Button } from '../../../components/buttons'
-import { ModalForm, Row } from '../../../components/form'
-import { Overlay } from '../../../components/overlay'
+import { Grid } from '../../../_components/containers'
+import { Button, IconButton } from '../../../_components/buttons'
+import { ModalForm, Row } from '../../../_components/form'
+import { Overlay } from '../../../_components/overlay'
 
 import {
 	TableScroll,
@@ -36,7 +36,7 @@ export default function UsersTable(){
 
 	useEffect(()=>{
 		if(!users)
-			dispatch(userActions.getChilds())
+			dispatch(userActions.getChildsUser())
 	}, [])
 
 	const handleChange = (e) =>{
@@ -46,12 +46,13 @@ export default function UsersTable(){
 		setLoading(true)
 
 	}
-	const HandleRemove = (username) => {
-		console.log('remove ', username)
+	const handleLock = (username) => {
+		
 	}
-	const HandleAdd = (code) => {
-		setShowForm(true)
-		setDefaultUsername(code)
+	const handleUnlock = (username) => {
+		
+	}
+	const HandleDelete = (code) => {
 
 	}
 	return (
@@ -85,36 +86,37 @@ export default function UsersTable(){
 				<thead>
 					<tr>
 					    <th></th>
-					    <th>LOCATION</th>
-					    <th>CODE</th>
-					    <th>ACCOUNT</th>
-					    <th></th>
+					    <th>Username</th>
+					    <th>Email</th>
+					    <th>Manages</th>
+					    <th>Role</th>
+					    <th>Status</th>
+					    <th style={{width: '7rem'}}>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					{users && 
-						users.map(user =>{
+						users.slice(1).map(user =>{
 							return (
-								<tr key={user.code}>
+								<tr key={user.username}>
 									<td><NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...avtConfig} /></td>
-								    <td>{user.name}</td>
-								    <td>{user.code}</td>
-								    <td>{user.username ? user.username : 'not found'}</td>
+								    <td>{user.username}</td>
+								    <td>{user.email}</td>
+								    <td>{user.manage_location}</td>
+								    <td>{user.role}</td>
+								    <td>{user.active ? <span style={{color: 'green'}}>active</span> : 
+								    					<span style={{color: 'red'}}>blocked</span>}
+								    </td>
 								    <td>
-								    	{user.username ?
-								    		<Button variant='contained'
-									    			bgColor='red'
-									    			style={{padding: '4px 12px'}}
-									    			onClick={()=>HandleRemove(user.username)}>
-									    			delete
-									    	</Button>
-									    	:
-									    	<Button variant='contained' 
-									    			style={{padding: '4px 12px'}}
-									    			onClick={()=>HandleAdd(user.code)}>
-									    			add
-									    	</Button>
-								    	}
+								    	<span style={{'white-space': 'nowrap'}}>
+								    		{user.active ? 
+								    			<IconButton onClick={()=>handleLock(user.username)}><i className="fas fa-lock"></i></IconButton>
+								    			:
+								    			<IconButton onClick={()=>handleUnlock(user.username)}><i className="fas fa-lock-open"></i></IconButton>
+								    		}
+									    	<IconButton><i className="fas fa-key"></i></IconButton>
+									    	<IconButton onClick={()=>HandleDelete(user.username)}><i className="far fa-trash-alt"></i></IconButton>
+									    </span>
 								    </td>
 								</tr>
 							)
