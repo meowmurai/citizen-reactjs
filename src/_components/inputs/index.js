@@ -82,10 +82,12 @@ const StyledSearchInput = styled(StyledInput)`
 	}
 	${SearchIcon}:hover + &{
 		width: 100%;
+		padding-right: 8px;
 	}
 
 	&:focus,:hover{
 		width: 100%;
+		padding-right: 8px;
 	}
 
 `

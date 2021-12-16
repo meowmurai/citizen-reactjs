@@ -52,8 +52,10 @@ export default function UsersTable(){
 	const handleUnlock = (username) => {
 		
 	}
-	const HandleDelete = (code) => {
-
+	const HandleDelete = (username) => {
+		if(window.confirm(`you can just lock this user. Do you still want delete ${username}?`)){
+			
+		}
 	}
 	return (
 		<div style={{position: 'relative'}}>

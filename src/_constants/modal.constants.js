@@ -1,0 +1,6 @@
+export const modalConstants = {
+    SHOW_OVERLAY: 'SHOW_MODAL_OVERLAY',
+    HIDE_OVERLAY: 'HIDE_MODAL_OVERLAY',
+    SHOW_LOGIN: 'SHOW_MODAL_LOGIN',
+    CLOSE_ALL: 'HIDE_MODAL_ALL'
+};

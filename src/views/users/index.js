@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { userActions } from '../../_actions'
@@ -21,6 +21,7 @@ import {
 
 
 export default function Users(){
+	const [searchPattern, setSearchPattern] = useState('')
 	const dispatch = useDispatch()
 
 	const handleEnter = (e) =>{
@@ -29,7 +30,7 @@ export default function Users(){
 		}
 	}
 	const handleAdd = ()=>{
-		alert('abc')
+		
 	}
 	return (
 		<>
@@ -44,7 +45,12 @@ export default function Users(){
 								
 							</Grid>
 							<Grid container sm={8} md={7} lg={6} justifyContent="flex-end" wrap='nowrap'>
-								<Search className='collapse' onKeyDown={handleEnter} placeholder='type to search' />
+								<Search 
+									className={searchPattern === '' ? 'collapse' : ''} 
+									onKeyDown={handleEnter} 
+									onChange={(e)=>setSearchPattern(e.target.value)} 
+									placeholder='type to search'
+								/>
 								<div style={{flex: '0 0 1rem'}}/>
 								<Button variant='contained' onClick={handleAdd}>
 									<i className="fal fa-plus"></i>

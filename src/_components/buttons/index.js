@@ -14,6 +14,7 @@ const StyledButton = styled.button`
 	border-radius: 10px;
 	padding: 8px 24px;
 	border: 0px;
+	overflow: hidden;
 	box-shadow: 5px 5px 10px #E5E5E5;
 	background-color: ${props => props.bgcolor === 'secondary' ? props.theme.palete.secondary.main :
 															   props.theme.palete.primary.main};

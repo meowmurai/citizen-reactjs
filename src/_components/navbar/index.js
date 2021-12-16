@@ -2,13 +2,11 @@ import {useState, useEffect, useRef} from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { userActions } from '../../_actions'
+import { userActions, modalActions } from '../../_actions'
 
-import LoginForm from '../../views/auth/login'
 import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLink, Empty, AvatarContainer, DropDown, DropDownItem} from './elements'
 import {Button, LoadingButton} from '../buttons'
 import {Input, Search} from '../inputs'
-import {Overlay} from '../overlay'
 import {FaBars} from 'react-icons/fa'
 
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
@@ -17,7 +15,6 @@ const Navbar = () => {
 	//state
 	const [isSticky, setIsSticky] = useState(false)
 	const [menuToggle, setMenuToggle] = useState(false)
-	const [showLogin, setShowLogin] = useState(false)
 	const [dropDown, setDropDown] = useState(false)
 
 	const authState = useSelector( state => state.authentication )
@@ -41,12 +38,6 @@ const Navbar = () => {
 		  observer.unobserve(cachedRef)
 		}
 	}, [])
-	// reset state on redirect
-	useEffect(()=>{
-		setMenuToggle(false)
-		setShowLogin(false)
-		setDropDown(false)
-	},[location])
 
 
 	// event handler
@@ -61,6 +52,9 @@ const Navbar = () => {
 		if(e.key === 'Enter'){
 			
 		}
+	}
+	const showLoginForm = () => {
+		dispatch(modalActions.login())
 	}
 	return (
 		<>
@@ -90,7 +84,7 @@ const Navbar = () => {
 							<>
 								<Button variant='contained' bgcolor='secondary' color='primary'
 										sx={{ boxShadow: 'none'}}
-										onClick={()=>setShowLogin(true)}>
+										onClick={showLoginForm}>
 										Login
 								</Button>
 							</>
@@ -100,11 +94,8 @@ const Navbar = () => {
 				<NavMenu show={menuToggle}>
 					<NavItem><NavLink to='/home/users'>Manage users</NavLink></NavItem>
 					<NavItem><NavLink to='/account'>Account</NavLink></NavItem>
-
 				</NavMenu>
 			</Nav>
-			<Overlay show={showLogin} onClick={()=>setShowLogin(false)} style={{'z-index': '10'}}/>
-			<LoginForm showLogin={showLogin} style={{'z-index': '10'}}/>
 		</>
 	)
 }
