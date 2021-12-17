@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { userActions } from '../../_actions'
+import { userActions, modalActions } from '../../_actions'
 
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
 
@@ -30,7 +30,7 @@ export default function Users(){
 		}
 	}
 	const handleAdd = ()=>{
-		
+		dispatch(modalActions.addUser())
 	}
 	return (
 		<>

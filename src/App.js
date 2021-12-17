@@ -10,6 +10,7 @@ import Home from './views/home'
 import Users from './views/users'
 import Notification from './views/notification'
 import OverlayProvider from './views/overlay'
+import ModalProvider from './views/modal'
 
 function App() {
     
@@ -21,6 +22,7 @@ function App() {
             <Router>
                 <OverlayProvider />
                 <Notification/>
+                <ModalProvider/>
                 <Header/>
                 <Routes>
                     <Route path='/' element={<Landing/>}/>

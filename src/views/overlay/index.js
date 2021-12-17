@@ -22,7 +22,7 @@ export default function OverlayProvider(){
     const dispatch = useDispatch()
 
     const close = () => {
-    	dispatch(modalActions.hide())
+    	dispatch(modalActions.close())
     }
     return (
     	<Overlay 

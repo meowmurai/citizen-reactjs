@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import LoginForm from './login'
+import LoginForm from './login.user'
+import AddUserForm from './add.user'
 
 export default function ModalProvider(){
 	const formName = useSelector( state => state.modal.name )
@@ -8,7 +9,9 @@ export default function ModalProvider(){
 
 	switch(formName){
 		case 'login':
-			return <LoginForm className='transform' show={show}/>
+			return <LoginForm show={show}/>
+		case 'add_user':
+			return <AddUserForm show={show}/>
 		default:
 			return <></>
 	}
