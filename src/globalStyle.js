@@ -9,7 +9,7 @@ export const theme = {
   palete: {
     primary: {
       main: '#564ec1',
-      lighter: '#51C9FF'
+      lighter: '#6960db'
     },
     secondary: {
       lighter: '#fff',

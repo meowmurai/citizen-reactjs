@@ -2,6 +2,18 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+
+export const Button = ({variant, children, ...rest}) => {
+	return (
+		<>
+			{variant === 'contained' ? 	<ContainedButton {...rest}><ChildWrapper>{children}</ChildWrapper></ContainedButton> : 
+			 variant === 'outlined' ? 	<OutlinedButton {...rest}><ChildWrapper>{children}</ChildWrapper></OutlinedButton> :
+			 							<TextButton {...rest}><ChildWrapper>{children}</ChildWrapper></TextButton> 
+			}
+		</>
+	)
+}
+
 const ChildWrapper = styled.span`
 	display: inline-block;
 	white-space: nowrap;
@@ -11,6 +23,9 @@ const StyledButton = styled.button`
 	cursor: pointer;
 	position: relative;
 	display: inline-block;
+	min-width: 20px;
+	height: 1.5rem;
+	text-align: center;
 	border-radius: 10px;
 	padding: 8px 24px;
 	border: 0px;
@@ -45,7 +60,7 @@ const StyledButton = styled.button`
 		}
 	}
 	@media screen and (max-width: 1024px){
-		padding: 4px 12px;
+		padding: 8px 12px;
 	}
 `	
 const ContainedButton = styled(StyledButton)`
@@ -96,13 +111,4 @@ export const LoadingButton = ({variant, loading, children, ...rest}) => {
 		</>
 	)
 }
-export const Button = ({variant, children, ...rest}) => {
-	return (
-		<>
-			{variant === 'contained' ? 	<ContainedButton {...rest}><ChildWrapper>{children}</ChildWrapper></ContainedButton> : 
-			 variant === 'outlined' ? 	<OutlinedButton {...rest}><ChildWrapper>{children}</ChildWrapper></OutlinedButton> :
-			 							<TextButton {...rest}><ChildWrapper>{children}</ChildWrapper></TextButton> 
-			}
-		</>
-	)
-}
+

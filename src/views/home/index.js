@@ -1,16 +1,5 @@
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { userActions } from '../../_actions'
-
-import NiceAvatar, { genConfig } from 'react-nice-avatar'
-
-import { Grid } from '../../_components/containers'
-import {LoadingButton} from '../../_components/buttons'
-import { Button } from '../../_components/buttons'
-import {Input} from '../../_components/inputs'
-
-import UsersTable from '../sections/usersTable'
+import UsersTable from '../_sections/usersTable'
 
 import { 
 	Container,
@@ -27,21 +16,6 @@ export default function Home(){
 
 	return (
 		<>
-			<Container>
-				<Title>Account</Title>
-				<Row>
-					<Grid sm={12} lg={8}>
-						<Card>
-							<CardHeader>
-								City You manages
-							</CardHeader>
-							<UsersTable/>
-						</Card>
-					</Grid>
-					<Grid sm={12} lg={4}>
-					</Grid>
-				</Row>
-			</Container>
-		</>
+			</>
 	)
 }

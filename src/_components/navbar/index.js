@@ -9,7 +9,7 @@ import {Button, LoadingButton} from '../buttons'
 import {Input, Search} from '../inputs'
 import {FaBars} from 'react-icons/fa'
 
-import NiceAvatar, { genConfig } from 'react-nice-avatar'
+import NiceAvatar from 'react-nice-avatar'
 
 const Navbar = () => {
 	//state
@@ -19,8 +19,6 @@ const Navbar = () => {
 
 	const authState = useSelector( state => state.authentication )
 	const dispatch = useDispatch()
-	const location = useLocation()
-	const avtConfig = genConfig()
 	const ref = useRef()
 
 	// handle scroll event
@@ -68,12 +66,17 @@ const Navbar = () => {
 							Citizen
 						</NavLink>
 					</NavLogo>
-					<Search onKeyDown={handleSearchKey} placeholder='type to search' containerSX={{'flex-basis': '50%'}} inputSX={{'box-shadow': 'none'}}/>
+					<Search 
+						className='collapse' onKeyDown={handleSearchKey}
+						placeholder='type to search' 
+						containerSX={{'flex-basis': '50%'}} 
+						inputSX={{'box-shadow': 'none'}}
+					/>
 					<AvatarContainer>
 						{ authState.user && !authState.loading ?
 							<>
 								<NavLink to='#' onClick={avtHandleClick}>
-									<NiceAvatar style={{ width: '3rem', height: '3rem' }} {...avtConfig} />
+									<NiceAvatar style={{ width: '3rem', height: '3rem' }} {...authState.user.avtConfig} />
 								</NavLink>
 								<DropDown show={dropDown}>
 									<DropDownItem><NavLink to='#' style={{margin: '0 auto'}}>setting</NavLink></DropDownItem>

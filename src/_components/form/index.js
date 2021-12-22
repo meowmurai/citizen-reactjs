@@ -1,20 +1,32 @@
 import styled, {keyframes} from 'styled-components'
 
-const keyframes1 = keyframes`
-	0%{top: -500px;}
-	100%{top: 100px;}
-`
-const keyframes2 = keyframes`
-	0%{opacity: 0%;}
-	100%{opacity: 100%;}
-`
 
+export const ModalForm = ({
+	children,
+	show,
+	width,
+	...rest
+}) => {
+	return (
+		<Container width={width}>
+			<FormWrapper show={show} {...rest}>
+				{children}
+			</FormWrapper>
+		</Container>
+	)
+}
+export const Title = styled.h2`
+	margin: 0;
+	display: block;
+	color: ${props => props.theme.palete.primary.main};
+`
 const Container = styled.div`
-	position: relative;
-	top: 0;
-	left: 0;
-	width: 40%;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: ${props => props.width ? props.width : '40%'};
 	min-width: 300px;
+	max-width: 95%;
 	height: 0;
 	z-index: 10;
 	margin: auto;
@@ -25,9 +37,10 @@ const Container = styled.div`
 const FormWrapper = styled.div`
 	background-color: #fff;
 	position: absolute;
-	top: 100px;
+	top: 0;
 	left: 0;
-	width: 100%;
+	transform: translate(-50%, -50%);
+	flex-basis: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content:center;
@@ -56,7 +69,7 @@ const FormWrapper = styled.div`
 `
 
 export const Row = styled.div`
-	width: 80%;
+	flex-basis: 100%;
 	margin: 10px;
 	display: flex;
 	justify-content: flex-start;
@@ -64,17 +77,4 @@ export const Row = styled.div`
 `
 
 
-export const ModalForm = ({
-	children,
-	show,
-	width,
-	...rest
-}) => {
-	return (
-		<Container width={width}>
-			<FormWrapper show={show} {...rest}>
-				{children}
-			</FormWrapper>
-		</Container>
-	)
-}
+

@@ -1,57 +1,95 @@
 import {useState, useEffect} from 'react'
-
-import { ModalForm, Row } from '../../_components/form'
-import { Input } from '../../_components/inputs'
-import { LoadingButton } from '../../_components/buttons'
-import { userActions } from '../../_actions'
+import styled from 'styled-components'
 import { useDispatch, useSelector  } from 'react-redux'
 
+import {
+	ModalForm, Title, Row, Input, InputDate, LoadingButton, Grid, Selector, Toggle
+} from '../../_components'
+import { modalActions, userActions } from '../../_actions'
+
+
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
-import { Toggle } from '../../_components/toggle'
+
 
 export default function AddUserForm({show,...rest}){
-	const [loading, setLoading] = useState(false)
-	const [defaultUsername, setDefaultUsername] = useState('')
+	const loading = useSelector(state => state.createUser.loading)
+	const locations = useSelector(state => state.locations.items)
+	const account = useSelector(state => state.authentication.user)
+	const users = useSelector(state => state.users.items)
+
+	const [manAvatar, setManAvatar] = useState(genConfig({sex: 'man'}))
+	const [womanAvatar, setWomanAvatar] = useState(genConfig({sex: 'woman'}))
+	const [gender, setGender] = useState(true)
 	const [form, setForm] = useState({
 		username: '',
 		email: '',
+		manage_location: '',
+		role: '',
 		password: ''
-	})
-	const users = useSelector(state => state.users.items)
+	})	
 	const dispatch = useDispatch()
-	const avtConfig = genConfig()
-
+	const roles = [{name: 'A1', code: 'A1'}, {name: 'A2', code: 'A2'}, {name: 'A3', code: 'A3'}, {name: 'B1', code: 'B1'}, {name: 'B2', code: 'B2'}]
+	
 	useEffect(()=>{
-
+		if(!locations)
+			dispatch(userActions.getChildsAll())
+			
 	}, [])
 
 	const handleChange = (e) =>{
 		setForm({...form, [e.target.name]: e.target.value})
 	}
 	const handleSubmit = async () =>{
-		setLoading(true)
-
+		dispatch(userActions.create(
+			{...form,
+				username: form.manage_location,
+				avtConfig: gender ? manAvatar : womanAvatar
+			}, () => {
+					dispatch(modalActions.close())
+			})
+		)
 	}
 
 	return (
-		<ModalForm show={show} className='appear' width='400px' style={{'z-index': '2'}}>
-			<Row style={{'flex-direction': 'column'}}>
-				<h2 style={{margin: '0', 'text-align': 'center'}}>Create account</h2>
-			</Row>
-			<Row style={{'justify-content': 'space-between', 'flex-wrap': 'wrap', 'margin': '10px 15px'}}>
-				<span>for</span>
-				<Toggle ></Toggle>
-				<div style={{width: '100%'}}/>
-				<span style={{'display': 'block'}}>
-					username: 
-				</span>
-				<span>{defaultUsername}</span>
-			</Row>
+		<ModalForm show={show} className='appear' style={{'z-index': '2'}}>
 			<Row>
-				<Input label='email' name='email' onChange={handleChange} required/>
+				<Title>Create account</Title>
 			</Row>
-			<Row>
-				<Input label='password' name='password' onChange={handleChange} type='password' required/>
+			<Row style={{'justifyContent': 'center','flex-wrap': 'wrap'}}>
+				{/* <Grid container sm={12} md={6} lg={5} flexDirection='column'> */}
+				<Grid container flexDirection='column'>
+					<Row>
+						<Selector name='manage_location' options={locations} onChange={handleChange} placeholder='Location'
+								style={{flexShrink: 1}}
+						/>
+						<Selector name='role' options={roles} onChange={handleChange} placeholder='Role'
+								style={{flexShrink: 2}}
+						/>
+
+						{/* <span style={{display: 'inline-block'}}>
+							Role: {account.role === 'A1' ? 'A2' : account.role === 'A2' ? 'A3' : account.role === 'A3' ? 'B1' : account.role === 'B1' ? 'B2' : 'N/A'}
+						</span> */}
+					</Row>
+					<Row>
+						<Input label='email' name='email' onChange={handleChange} type='email' required/>
+					</Row>
+					<Row>
+						<Input label='password' name='password' onChange={handleChange} type='password' required/>
+					</Row>
+				</Grid>
+				{/* <Grid container sm={12} md={6} lg={5} flexDirection='column'> */}
+				<Grid container flexDirection='column'>
+					<Row style={{'justify-content': 'center'}}>
+						{gender ? 
+							<NiceAvatar style={{ width: '6rem', height: '6rem' }} {...manAvatar}/>
+							:
+							<NiceAvatar style={{ width: '6rem', height: '6rem' }} {...womanAvatar}/>
+						}
+					</Row>
+					<Row style={{'justify-content': 'center'}}>
+						<Toggle onToggle={(state)=>setGender(state)}/>
+					</Row>
+				</Grid>
 			</Row>
 			<Row style={{'justify-content': 'center'}}>
 				<LoadingButton loading={loading} variant='contained' onClick={handleSubmit}>Create</LoadingButton>

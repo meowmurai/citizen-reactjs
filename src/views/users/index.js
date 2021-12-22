@@ -5,13 +5,12 @@ import { userActions, modalActions } from '../../_actions'
 
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
 
-import { Grid } from '../../_components/containers'
-import {LoadingButton} from '../../_components/buttons'
-import { Button, IconButton } from '../../_components/buttons'
-import {Input, Search} from '../../_components/inputs'
-import { Card, CardHeader } from '../../_components/card'
+import {
+	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader
+} from '../../_components'
 
-import UsersTable from '../sections/usersTable'
+import UsersTable from '../_sections/usersTable'
+
 
 import { 
 	Container,
@@ -23,6 +22,8 @@ import {
 export default function Users(){
 	const [searchPattern, setSearchPattern] = useState('')
 	const dispatch = useDispatch()
+
+	const avtConfig = genConfig()
 
 	const handleEnter = (e) =>{
 		if(e.key === 'Enter'){

@@ -4,6 +4,10 @@ import { authHeader } from '../_helpers';
 export const userService = {
     login,
     logout,
+    create,
+    setActivate,
+    addSchedule,
+    del,
     getChildsUser,
     getChildsAll
 };
@@ -19,9 +23,8 @@ function login(username, password) {
         .then(handleResponse)
         .then(messages => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(messages.token));
-
-            return messages.token;
+            localStorage.setItem('user', JSON.stringify(messages));
+            return messages;
         });
 }
 
@@ -55,17 +58,58 @@ function getChildsAll() {
                 return messages.data
             })
 }
-function create() {
+function create(username, email, password, manage_location, role, avtConfig) {
     const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
+        method: 'POST',
+        headers: {...authHeader(), 'Content-Type': 'application/json'},
+        body: JSON.stringify({ username, email, password, manage_location, role, avtConfig })
     };
 
-    return fetch(`${env.userApiUrl}/childs/all`, requestOptions)
+    return fetch(`${env.userApiUrl}/create`, requestOptions)
             .then(handleResponse)
             .then(messages => {
-                return messages.data
+                return messages
             })
+}
+
+function del(username) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username })
+    };
+    return fetch(`${env.userApiUrl}/delete`, requestOptions)
+        .then(handleResponse)
+        .then(messages => {
+            return messages
+        })
+}
+
+function setActivate(username, is_activate) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, is_active: is_activate })
+    };
+    return fetch(`${env.userApiUrl}/childs/authorize/state`, requestOptions)
+        .then(handleResponse)
+        .then(messages => {
+
+            return messages
+        })
+}
+
+function addSchedule(username, start_time, end_time) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, start_time, end_time })
+    };
+    return fetch(`${env.userApiUrl}/childs/authorize/time`, requestOptions)
+        .then(handleResponse)
+        .then(messages => {
+            return messages
+        })
 }
 
 function handleResponse(response) {
@@ -75,7 +119,7 @@ function handleResponse(response) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout();
-                window.location.reload(true);
+                //window.location.reload(true);
             }
 
             const error = (data && data.details) || response.statusText;

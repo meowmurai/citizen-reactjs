@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react'
 
-import { ModalForm, Row } from '../../_components/form'
-import { Input } from '../../_components/inputs'
-import { LoadingButton } from '../../_components/buttons'
+import {
+	ModalForm, Title, Row, Input, LoadingButton
+} from '../../_components'
 import { userActions } from '../../_actions'
 import { useDispatch, useSelector  } from 'react-redux'
 
@@ -24,9 +24,9 @@ export default function LoginForm({show, rest}){
 
 	}
 	return (
-		<ModalForm show={show} className='transform' {...rest}>
+		<ModalForm show={show} width="400px" className='transform' {...rest}>
 			<Row>
-				<h2>Login</h2>
+				<Title>Login</Title>
 			</Row>
 			<Row>
 				<Input label='username' name='username' onChange={handleChange} required/>
