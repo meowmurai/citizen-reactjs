@@ -44,15 +44,15 @@ export default function UsersTable(){
 	return (
 		<div style={{position: 'relative'}}>
 			<TableScroll>
-				<Table>
+				<Table className='align-center'>
 					<thead>
 						<tr>
-						    <th></th>
-						    <th>Username</th>
-						    <th>Email</th>
-						    <th>Manages</th>
-						    <th>Role</th>
-						    <th>Status</th>
+						    <th style={{width: '5rem'}}></th>
+						    <th style={{textAlign: 'left'}}>Username</th>
+						    <th style={{textAlign: 'left'}}>Email</th>
+						    <th style={{width: '7rem'}}>Manages</th>
+						    <th style={{width: '7rem'}}>Role</th>
+						    <th style={{width: '7rem'}}>Status</th>
 						    <th style={{width: '7rem'}}>Actions</th>
 						</tr>
 					</thead>
@@ -61,16 +61,18 @@ export default function UsersTable(){
 							users.slice(1).map(user =>{
 								return (
 									<tr key={randomID()}>
-										<td><NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...avtConfig} /></td>
-									    <td>{user.username}</td>
-									    <td>{user.email}</td>
+										<td style={{textAlign: 'unset'}}>
+											<NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...avtConfig} />
+										</td>
+									    <td style={{textAlign: 'left'}}>{user.username}</td>
+									    <td style={{textAlign: 'left'}}>{user.email}</td>
 									    <td>{user.manage_location}</td>
 									    <td>{user.role}</td>
 									    <td>{user.active ? <span style={{color: 'green'}}>active</span> : 
 									    					<span style={{color: 'red'}}>blocked</span>}
 									    </td>
 									    <td>
-									    	<span style={{'white-space': 'nowrap'}}>
+									    	<span style={{'whiteSpace': 'nowrap'}}>
 									    		{user.active ? 
 									    			<IconButton onClick={()=>handleLock(user.username)}><i className="fas fa-lock"></i></IconButton>
 									    			:

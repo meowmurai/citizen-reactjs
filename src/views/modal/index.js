@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import LoginForm from './login.user'
 import AddUserForm from './add.user'
+import AddLocationForm from './add.location'
 import AddSchedule from './add.schedule'
 
 export default function ModalProvider(){
@@ -13,7 +14,9 @@ export default function ModalProvider(){
 		case 'login':
 			return <LoginForm show={show}/>
 		case 'add_user':
-			return <AddUserForm show={show}/>
+			return <AddUserForm show={show} payload={payload}/>
+		case 'add_location':
+			return <AddLocationForm show={show}/>
 		case 'add_schedule':
 			return <AddSchedule show={show} payload={payload}/>
 		default:

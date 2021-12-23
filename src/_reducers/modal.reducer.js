@@ -9,11 +9,19 @@ export function modal(state = {overlay: false}, action) {
                 name: 'login',
                 show: true
             }
-        case modalConstants.SHOW_ADD:
+        case modalConstants.SHOW_ADD_USER:
             return {
                 ...state,
                 overlay: true,
                 name: 'add_user',
+                payload: action.payload,
+                show: true
+            }  
+        case modalConstants.SHOW_ADD_LOCATION:
+            return {
+                ...state,
+                overlay: true,
+                name: 'add_location',
                 show: true
             }  
         case modalConstants.SHOW_SCHEDULE:

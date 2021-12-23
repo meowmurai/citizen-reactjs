@@ -23,7 +23,7 @@ function login(username, password, onSuccess) {
                 user => {
                     dispatch(success(user))
                     dispatch(alertActions.success('login succeed'))
-                    //onSuccess()
+                    onSuccess()
                 },
                 error => {
                     dispatch(failure(error));
@@ -45,10 +45,10 @@ function logout() {
 
 function create(form, onSuccess=()=>{}) {
     return dispatch => {
-        const {username, email, password, manage_location, role, avtConfig} = {...form}
+        const {username, email, password, location_code, role, avtConfig} = {...form}
         console.log(username)
-        console.log(email)
-        if( username !== manage_location ){
+        console.log(location_code)
+        if( username !== location_code ){
             return dispatch(alertActions.error('username\'s not match location code'))
         }
         if( !validateEmail(email) ){
@@ -56,7 +56,7 @@ function create(form, onSuccess=()=>{}) {
         }
         dispatch(request())
 
-        userService.create(username, email, password, manage_location, role, avtConfig)
+        userService.create(username, email, password, location_code, role, avtConfig)
             .then(
                 message => {
                     dispatch(success())

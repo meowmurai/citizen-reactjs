@@ -4,7 +4,9 @@ export const InputContainer = styled.div`
 	display: inline-block;
 	position: relative;
 
-	transition: 0.3s all ease-in-out;
+	&.collapse {
+		width: fit-content;
+	}
 `
 
 export const StyledInput = styled.input`
@@ -48,32 +50,62 @@ export const StyledLabel = styled.label`
 export const SearchIcon = styled.div`
 	position: absolute;
 	top: 0;
-	width: 50px;
+	right: 0;
+	width: 40px;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1.5rem;
 	color: ${props => props.theme.palete.primary.main};
+	
+	cursor: pointer;
+	opacity: 0.8;
+	&:hover{
+		opacity: 1;
+	}
+	&:active {
+		opacity: 0.9;
+	}
+`
+export const RestoreButton = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 100%;
+	display: ${props => props.show ? 'flex': 'none'};
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	color: ${props => props.theme.palete.primary.main};
 
 	cursor: pointer;
-
+	opacity: 0.8;
+	&:hover{
+		opacity: 1;
+	}
+	&:active {
+		opacity: 0.9;
+	}
 `
 export const StyledSearchInput = styled(StyledInput)`
-	padding-left: 50px;
+	padding-right: 40px;
+	
 	&.collapse{
-		width: 0;
-		padding-right: 0;
+		${({collapse}) => {
+			if(collapse) return `
+				transition: 0.3 padding ease-in-out;
+				padding-left: 0;
+				width: 0;
+			`
+			else return `
+				padding-left: 50px;
+				width: 100%;
+			`
+		}}
 	}
-	${SearchIcon}:hover + &{
-		width: 100%;
-		padding-right: 8px;
-	}
-
-	&:focus,:hover{
-		width: 100%;
-		padding-right: 8px;
-	}
+	
 
 `
 

@@ -38,7 +38,6 @@ export const NavbarContainer = styled(OuterContainer)`
 export const NavLogo = styled.div`
 	color: inherit;
 	display: flex;
-	justify-self: flex-start;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;

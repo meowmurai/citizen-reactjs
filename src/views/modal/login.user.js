@@ -20,7 +20,7 @@ export default function LoginForm({show, rest}){
 		setForm({...form, [e.target.name]: e.target.value})
 	}
 	const handleSubmit = async () =>{
-		dispatch(userActions.login(form.username, form.password, ()=>{window.location.reload(true);}))
+		dispatch(userActions.login(form.username, form.password, ()=>{window.location.reload(true)}))
 
 	}
 	return (

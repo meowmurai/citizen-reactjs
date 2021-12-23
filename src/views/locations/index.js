@@ -9,7 +9,7 @@ import {
 	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader
 } from '../../_components'
 
-import UsersTable from '../_sections/usersTable'
+import LocationsTable from '../_sections/locationsTable'
 
 
 import { 
@@ -23,46 +23,42 @@ export default function Locations(){
 	const [searchPattern, setSearchPattern] = useState('')
 	const dispatch = useDispatch()
 
-	const avtConfig = genConfig()
-
 	const handleEnter = (e) =>{
 		if(e.key === 'Enter'){
 			console.log(e.target.value)
 		}
 	}
 	const handleAdd = ()=>{
-		dispatch(modalActions.addUser())
+		dispatch(modalActions.addLocation())
 	}
 	return (
-		<>
-			<Container>
-				<Title>Locations</Title>
-				<Row>
+		<Container>
+			<Title>Locations</Title>
+			<Row>
+				<Grid sm={12} md={8} lg={8}>
 					<Card>
 						<CardHeader >
-							<Grid sm={5} md={7} lg={8}>
-								{/*<h4 style={{margin: '0'}}>User Management</h4>*/}
-								<span>Location Management</span>
-								
-							</Grid>
-							<Grid container sm={8} md={7} lg={6} justifyContent="flex-end" wrap='nowrap'>
-								<Search 
-									className={searchPattern === '' ? 'collapse' : ''} 
-									onKeyDown={handleEnter} 
-									onChange={(e)=>setSearchPattern(e.target.value)} 
-									placeholder='type to search'
-								/>
-								<div style={{flex: '0 0 1rem'}}/>
-								<Button variant='contained' onClick={handleAdd}>
-									<i className="fal fa-plus"></i>
-									<span> add</span>
-								</Button>
-							</Grid>
+							<span style={{lineHeight: '100%',padding: "4px 0", marginRight: 'auto','overflow': 'hidden', flex: '1 1 0px'}}>Location Management</span>
+							
+							<Search 
+								className={searchPattern === '' ? 'collapse' : ''} 
+								onKeyDown={handleEnter} 
+								onChange={(e)=>setSearchPattern(e.target.value)} 
+								placeholder='type to search'
+							/>
+							<div style={{flex: '0 1 1rem'}}/>
+							<Button variant='contained' onClick={handleAdd}>
+								<i className="fal fa-plus"></i>
+								<span> add</span>
+							</Button>
 						</CardHeader>
-						<UsersTable/>
+						<LocationsTable/>
 					</Card>
-				</Row>
-			</Container>
-		</>
+				</Grid>
+				<Grid sm={12} md={4} lg={4}>
+
+				</Grid>
+			</Row>
+		</Container>
 	)
 }

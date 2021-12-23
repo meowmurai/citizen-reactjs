@@ -11,11 +11,10 @@ import { modalActions, userActions } from '../../_actions'
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
 
 
-export default function AddUserForm({show,...rest}){
+export default function AddUserForm({show, payload, ...rest}){
 	const loading = useSelector(state => state.createUser.loading)
 	const locations = useSelector(state => state.locations.items)
 	const account = useSelector(state => state.authentication.user)
-	const users = useSelector(state => state.users.items)
 
 	const [manAvatar, setManAvatar] = useState(genConfig({sex: 'man'}))
 	const [womanAvatar, setWomanAvatar] = useState(genConfig({sex: 'woman'}))
@@ -23,12 +22,12 @@ export default function AddUserForm({show,...rest}){
 	const [form, setForm] = useState({
 		username: '',
 		email: '',
-		manage_location: '',
+		location_code: `${payload ? payload.code : ''}`,
 		role: '',
 		password: ''
 	})	
 	const dispatch = useDispatch()
-	const roles = [{name: 'A1', code: 'A1'}, {name: 'A2', code: 'A2'}, {name: 'A3', code: 'A3'}, {name: 'B1', code: 'B1'}, {name: 'B2', code: 'B2'}]
+	const roles = {A0: [{name: 'A1', code: 'A1'}], A1: [{name: 'A2', code: 'A2'}], A2: [{name: 'A3', code: 'A3'}], A3: [{name: 'B1', code: 'B1'}], B1: [{name: 'B2', code: 'B2'}]}
 	
 	useEffect(()=>{
 		if(!locations)
@@ -42,7 +41,7 @@ export default function AddUserForm({show,...rest}){
 	const handleSubmit = async () =>{
 		dispatch(userActions.create(
 			{...form,
-				username: form.manage_location,
+				username: form.location_code,
 				avtConfig: gender ? manAvatar : womanAvatar
 			}, () => {
 					dispatch(modalActions.close())
@@ -55,15 +54,20 @@ export default function AddUserForm({show,...rest}){
 			<Row>
 				<Title>Create account</Title>
 			</Row>
-			<Row style={{'justifyContent': 'center','flex-wrap': 'wrap'}}>
+			<Row style={{'justifyContent': 'center','flexWrap': 'wrap'}}>
 				{/* <Grid container sm={12} md={6} lg={5} flexDirection='column'> */}
 				<Grid container flexDirection='column'>
 					<Row>
-						<Selector name='manage_location' options={locations} onChange={handleChange} placeholder='Location'
+						<Selector name='location_code' value={form.location_code} options={locations} onChange={handleChange} placeholder='Location'
 								style={{flexShrink: 1}}
 						/>
-						<Selector name='role' options={roles} onChange={handleChange} placeholder='Role'
-								style={{flexShrink: 2}}
+						<Selector 
+							name='role' 
+							value={roles[account.role][0].code}
+							options={roles[account.role]} 
+							onChange={handleChange} 
+							placeholder='Role'
+							style={{flexShrink: 2}}
 						/>
 
 						{/* <span style={{display: 'inline-block'}}>
@@ -92,7 +96,7 @@ export default function AddUserForm({show,...rest}){
 				</Grid>
 			</Row>
 			<Row style={{'justify-content': 'center'}}>
-				<LoadingButton loading={loading} variant='contained' onClick={handleSubmit}>Create</LoadingButton>
+				<LoadingButton type='submit' loading={loading} variant='contained' onClick={handleSubmit}>Create</LoadingButton>
 			</Row>
 		</ModalForm>
 	)

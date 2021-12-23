@@ -22,40 +22,37 @@ export default function LocationsTable(){
 	return (
 		<div style={{position: 'relative'}}>
 			<TableScroll>
-				<Table>
+				<Table className='align-center'>
 					<thead>
 						<tr>
-						    <th></th>
-						    <th>Name</th>
-						    <th>Code</th>
-						    <th>Manager</th>
+						    <th style={{width: '3rem'}}>#</th>
+						    <th style={{textAlign: 'left'}}>Name</th>
+						    <th style={{width: '5rem'}}>Code</th>
+						    <th style={{width: '5rem'}}>Manager</th>
 						    <th style={{width: '7rem'}}>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
-						{locations && 
-							locations.map(loca =>{
-								return (
-									<tr key={randomID()}>
-										<td><NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...avtConfig} /></td>
-									    <td>{loca.name}</td>
-									    <td>{loca.code}</td>
-									    <td>{loca.username}</td>
-									    <td>
-									    	<span style={{'white-space': 'nowrap'}}>
-									    		{user.active ? 
-									    			<IconButton onClick={()=>handleLock(loca.code)}><i className="fas fa-lock"></i></IconButton>
-									    			:
-									    			<IconButton onClick={()=>handleUnlock(loca.code)}><i className="fas fa-lock-open"></i></IconButton>
-									    		}
-										    	<IconButton><i className="fas fa-key"></i></IconButton>
-										    	<IconButton onClick={()=>HandleDelete(loca.code)}><i className="far fa-trash-alt"></i></IconButton>
-										    </span>
-									    </td>
-									</tr>
-								)
-							})
-						}
+						{locations && locations.map((loca, index) =>{
+							return (
+								<tr key={randomID()}>
+									<td>{index}</td>
+									<td style={{textAlign: 'left'}}>{loca.name}</td>
+									<td>{loca.code}</td>
+									<td>{loca.username ? 
+											loca.username : 
+											<IconButton><i className="fas fa-user-plus"></i></IconButton>
+										}
+									</td>
+									<td>
+										<span style={{'whiteSpace': 'nowrap'}}>
+											<IconButton><i className="fas fa-edit"></i></IconButton>
+											<IconButton><i className="far fa-trash-alt"></i></IconButton>
+										</span>
+									</td>
+								</tr>
+							)
+						})}
 					</tbody>
 				</Table>
 			</TableScroll>

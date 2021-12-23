@@ -12,7 +12,6 @@ import Locations from './views/locations'
 import Notification from './views/notification'
 import OverlayProvider from './views/overlay'
 import ModalProvider from './views/modal'
-
 function App() {
     
 

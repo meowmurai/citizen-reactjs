@@ -44,7 +44,7 @@ export const NotiItem = (props)=> {
 	}
 	return (
 		<NotiWrapper className={`${props.type} ${exit ? 'exit' : ''}`}>
-			<IconButton onClick={handleClose}><i class="fas fa-times-circle"></i></IconButton>
+			<IconButton onClick={handleClose}><i className="fas fa-times-circle"></i></IconButton>
 			<p>{props.message}</p>
 			<Bar width={`${barWidth}%`} />
 		</NotiWrapper>

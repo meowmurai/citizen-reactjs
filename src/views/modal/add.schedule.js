@@ -23,7 +23,7 @@ export default function AddSchedule({show, payload, ...rest}){
 		setChecked(e.target.checked)
 	}
 	const handleSubmit = async () =>{
-		console.log(payload)
+		console.log(startDate)
 		setLoading(true)
 		dispatch(userActions.addSchedule(payload.username, startDate, endDate, () => {
 			setLoading(false)

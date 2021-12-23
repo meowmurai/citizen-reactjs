@@ -24,6 +24,11 @@ export const Table = styled.table`
   		padding: 8px;
   		text-align: left;
   	}
+	&.align-center{
+		th,td {
+			text-align: center;
+		}
+	}
   	td{
   		font-size: 0.8rem;
   	}

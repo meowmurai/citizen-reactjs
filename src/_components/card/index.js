@@ -14,7 +14,7 @@ export const CardHeader = styled.div`
 	font-weight: 500;
 
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	@media screen and (max-width: 768px){
 		padding: 0.75rem 1rem;

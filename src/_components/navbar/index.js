@@ -66,12 +66,6 @@ const Navbar = () => {
 							Citizen
 						</NavLink>
 					</NavLogo>
-					<Search 
-						className='collapse' onKeyDown={handleSearchKey}
-						placeholder='type to search' 
-						containerSX={{'flex-basis': '50%'}} 
-						inputSX={{'box-shadow': 'none'}}
-					/>
 					<AvatarContainer>
 						{ authState.user && !authState.loading ?
 							<>
@@ -95,7 +89,8 @@ const Navbar = () => {
 					</AvatarContainer>
 				</NavbarContainer>
 				<NavMenu show={menuToggle}>
-					<NavItem><NavLink to='/home/users'>Manage users</NavLink></NavItem>
+					<NavItem><NavLink to='/home/users'>Users</NavLink></NavItem>
+					<NavItem><NavLink to='/home/locations'>Locations</NavLink></NavItem>
 					<NavItem><NavLink to='/account'>Account</NavLink></NavItem>
 				</NavMenu>
 			</Nav>

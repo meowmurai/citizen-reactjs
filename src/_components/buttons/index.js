@@ -31,6 +31,7 @@ const StyledButton = styled.button`
 	border: 0px;
 	overflow: hidden;
 	box-shadow: 5px 5px 10px #E5E5E5;
+	transition: 0.3s all ease-in-out;
 	background-color: ${props => props.bgcolor === 'secondary' ? props.theme.palete.secondary.main :
 															   props.theme.palete.primary.main};
 	color: 				${props => props.color === 'primary' ? props.theme.palete.primary.main :
@@ -45,6 +46,13 @@ const StyledButton = styled.button`
 		top: 0;
 		left: 0;
 		
+	}
+	&:hover:after{
+		opacity: 0.4;
+	}
+	&:active:after{
+		background-color: #454545;
+		opacity: 0.2;
 	}
 	${props => props.disabled ? `
 		pointer-events: none;
@@ -64,33 +72,30 @@ const StyledButton = styled.button`
 	}
 `	
 const ContainedButton = styled(StyledButton)`
-	&:hover:after{
-		opacity: 0.3;
-		transition: 0.3s all ease-in-out;
-	}
+	
 `		
 const OutlinedButton = styled(StyledButton)`
 	background-color: transparent;
 	border: 2px solid;
-	&:hover:after{
-		opacity: 0.3;
-		transition: 0.3s all ease-in-out;
-	}
+	
 `	
 const TextButton = styled(StyledButton)`
 	background-color: transparent;
 	box-shadow: none;
-	&:hover:after{
-		opacity: 0.3;
-		transition: 0.3s all ease-in-out;
-	}
+	
 `		
 export const IconButton = styled(StyledButton)`
 	background-color: transparent;
 	padding: 2px 4px;
 	border: none;
+	border-radius: 50%;
 	box-shadow: none;
-	color: ${props => props.color ? props.color : '#8f8f8f'}
+	color: ${props => props.color ? props.color : '#454545'};
+	opacity: 0.6;
+
+	&:hover{
+		opacity: 1;
+	}
 `
 export const LoadingButton = ({variant, loading, children, ...rest}) => {
 	return (

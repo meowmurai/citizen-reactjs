@@ -40,24 +40,21 @@ export default function Users(){
 				<Row>
 					<Card>
 						<CardHeader >
-							<Grid sm={5} md={7} lg={8}>
-								{/*<h4 style={{margin: '0'}}>User Management</h4>*/}
-								<span>User Management</span>
-								
-							</Grid>
-							<Grid container sm={8} md={7} lg={6} justifyContent="flex-end" wrap='nowrap'>
-								<Search 
-									className={searchPattern === '' ? 'collapse' : ''} 
-									onKeyDown={handleEnter} 
-									onChange={(e)=>setSearchPattern(e.target.value)} 
-									placeholder='type to search'
-								/>
-								<div style={{flex: '0 0 1rem'}}/>
-								<Button variant='contained' onClick={handleAdd}>
-									<i className="fal fa-plus"></i>
-									<span> add</span>
-								</Button>
-							</Grid>
+							<span style={{lineHeight: '100%',padding: "4px 0", marginRight: 'auto','overflow': 'hidden', flex: '1 1 0px'}}>
+								Users Management
+							</span>
+							
+							<Search 
+								className={searchPattern === '' ? 'collapse' : ''} 
+								onKeyDown={handleEnter} 
+								onChange={(e)=>setSearchPattern(e.target.value)} 
+								placeholder='type to search'
+							/>
+							<div style={{flex: '0 1 1rem'}}/>
+							<Button variant='contained' onClick={handleAdd}>
+								<i className="fal fa-plus"></i>
+								<span> add</span>
+							</Button>
 						</CardHeader>
 						<UsersTable/>
 					</Card>
