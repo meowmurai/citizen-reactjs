@@ -9,14 +9,15 @@ export const theme = {
   palete: {
     primary: {
       main: '#564ec1',
-      lighter: '#51C9FF'
+      lighter: '#6960db'
     },
     secondary: {
       lighter: '#fff',
       main: '#E5E5E5',
       darker: '#8487E9',
     },
-    red: '#F87F81',
+    red: '#fa5558',
+    green: '#4aed45',
     black: '#121029',
     gray: '#2e3138',
     backColor: '#e6e4eb',
@@ -27,5 +28,7 @@ export const theme = {
     container_gutter_lg : '160px',
     container_gutter_md : '80px',
     container_gutter_sm : '16px',
+    context_gutter_sm: '1rem',
+    context_gutter_md: '1.5rem'
   }
 }

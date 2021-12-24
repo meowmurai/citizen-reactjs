@@ -1,8 +1,8 @@
-import {LoadingButton} from '../../components/buttons'
-import {Input} from '../../components/inputs'
+import {
+	LoadingButton, Input
+} from '../../_components'
 import {Hero, Logo, Container, Survey, Row, About, Divider, Context} from './elements'
 export default function Landing(){
-
 	return (
 		<>
 			{/*<Hero>
