@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Grid = styled.div`
 	display: ${props => props.container ? 'flex' : 'block'};
 
-	padding: 0 4px;
+	padding: 4px 4px;
 
 	flex-wrap: ${props => props.wrap ? props.wrap : 'nowrap'};
 

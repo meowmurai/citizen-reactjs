@@ -1,4 +1,5 @@
 import styled, {keyframes} from 'styled-components'
+import { DotPulse } from '../loader/elements'
 
 
 export const ModalForm = ({
@@ -18,6 +19,7 @@ export const ModalForm = ({
 export const Title = styled.h2`
 	margin: 0;
 	display: block;
+	text-align: center;
 	color: ${props => props.theme.palete.primary.main};
 `
 const Container = styled.div`
@@ -69,7 +71,7 @@ const FormWrapper = styled.div`
 `
 
 export const Row = styled.div`
-	flex-basis: 100%;
+	flex: 1 0 100%;
 	margin: 10px;
 	display: flex;
 	justify-content: flex-start;

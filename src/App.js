@@ -6,7 +6,6 @@ import { ThemeProvider } from 'styled-components'
 
 import Header from './views/header'
 import Landing from './views/landing'
-import Home from './views/home'
 import Users from './views/users'
 import Locations from './views/locations'
 import Notification from './views/notification'

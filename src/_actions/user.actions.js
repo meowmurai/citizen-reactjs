@@ -46,8 +46,8 @@ function logout() {
 function create(form, onSuccess=()=>{}) {
     return dispatch => {
         const {username, email, password, location_code, role, avtConfig} = {...form}
-        console.log(username)
-        console.log(location_code)
+        if(!(username && email && password && location_code && role))
+            return dispatch(alertActions.error('please fill in the form'))
         if( username !== location_code ){
             return dispatch(alertActions.error('username\'s not match location code'))
         }

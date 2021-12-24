@@ -16,7 +16,8 @@ export default function ModalProvider(){
 		case 'add_user':
 			return <AddUserForm show={show} payload={payload}/>
 		case 'add_location':
-			return <AddLocationForm show={show}/>
+			console.log(payload)
+			return <AddLocationForm show={show} payload={payload}/>
 		case 'add_schedule':
 			return <AddSchedule show={show} payload={payload}/>
 		default:

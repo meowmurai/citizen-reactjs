@@ -7,36 +7,47 @@ import {
 import { modalActions, userActions, locationActions } from '../../_actions'
 
 
-export default function AddLocationForm({show,...rest}){
+export default function AddLocationForm({show, payload, ...rest}){
 	const loading = useSelector(state => state.createUser.loading)
-	const account = useSelector(state => state.authentication.user)
+	const role = useSelector(state => state.authentication.user.role)
+
 	const [form, setForm] = useState({
-		name: '',
-		code: ''
-	})	
-	const role = account ? account.role : null
+		name: `${payload ? payload.name : ''}`,
+		code: `${payload ? payload.code : ''}`
+	})
 	const dispatch = useDispatch()
 
 	const handleChange = (e) =>{
 		setForm({...form, [e.target.name]: e.target.value})
 	}
 	const handleSubmit = async () =>{
-		dispatch(locationActions.create(form),() => {
-			dispatch(modalActions.addUser())
-		})
+		dispatch(locationActions.create(form))
 	}
 
 	return (
-		<ModalForm show={show} className='appear' style={{'z-index': '2'}}>
+		<ModalForm show={show} className='appear' width='300px' style={{'z-index': '2'}}>
 			<Row>
-				<Title>Create new {role == "A1"? 'City': role == 'A2'? 'province' : role == 'A3'? 'District': role == 'B1'? 'Sub-district' : 'N/A'}</Title>
+				<Title>
+					{payload && payload.isUpdate ? `Assign ` : 'Create new '} 
+					{role == "A1"? 'City': role == 'A2'? 'province' : role == 'A3'? 'District': role == 'B1'? 'Sub-district' : 'N/A'}
+					{payload && payload.isUpdate ? `'s code` : ''} 
+				</Title>
 			</Row>
 			<Row style={{'justifyContent': 'center','flexWrap': 'wrap'}}>
                 <Row>
-                    <Input label='name' name='name' onChange={handleChange} type='text' required/>
+                    <Input 
+						value={form.name} label='name' name='name' 
+						onChange={handleChange} type='text' 
+						disabled={payload && payload.isUpdate} required
+					
+					/>
                 </Row>
                 <Row>
-                    <Input label='code' name='code' onChange={handleChange} type='text'/>
+                    <Input 
+						value={form.code} label='code' name='code' 
+						onChange={handleChange} type='text'
+						required
+					/>
                 </Row>
 			</Row>
 			<Row style={{'justify-content': 'center'}}>

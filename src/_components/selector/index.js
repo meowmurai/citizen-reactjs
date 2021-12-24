@@ -3,12 +3,13 @@ import styled from 'styled-components'
 
 import randomID from '../../_helpers/uuid'
 
-export const Selector = ({options=[], width, value, onChange, placeholder, name, ...rest}) => {
+export const Selector = ({options=[], width, value, disabled, onChange, placeholder, name, ...rest}) => {
     const [active, setActive] = useState(false)
     const [show, setShow] = useState(false)
     const [_value, setValue] = useState(value)
 
     const handleClick = () =>{
+        if(disabled) return;
         setActive(preactive => !preactive)
         setShow(preshow => !preshow)
     }
@@ -39,7 +40,7 @@ export const Selector = ({options=[], width, value, onChange, placeholder, name,
             {...rest}>
 
             <Select>
-                <span>{value ? value : placeholder}</span>
+                <span>{_value ? _value : placeholder}</span>
                 <i className="fa fa-chevron-left"></i>
             </Select>
             <input type="hidden" name="gender"/>

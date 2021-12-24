@@ -9,8 +9,6 @@ export function locations(state = {}, action) {
       };
     case userConstants.GETCHILDLOCATIONS_SUCCESS:
       return {
-        ...state,
-        loading: false,
         items: action.locations
       };
     case userConstants.GETCHILDLOCATIONS_FAILURE:

@@ -5,13 +5,16 @@ import 'react-nice-dates/build/style.css'
 import { InputContainer, StyledInput } from './elements'
 
 export const InputDate = ({startDate, setStartDate, endDate, setEndDate}) => {
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
   return (
     <DateRangePicker
       startDate={startDate}
       endDate={endDate}
       onStartDateChange={setStartDate}
       onEndDateChange={setEndDate}
-      minimumDate={new Date()}
+      minimumDate={tomorrow}
       minimumLength={1}
       format='dd MMM yyyy'
       locale={vi}

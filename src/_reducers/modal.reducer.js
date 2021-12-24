@@ -22,6 +22,7 @@ export function modal(state = {overlay: false}, action) {
                 ...state,
                 overlay: true,
                 name: 'add_location',
+                payload: action.payload,
                 show: true
             }  
         case modalConstants.SHOW_SCHEDULE:

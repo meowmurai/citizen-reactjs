@@ -4,16 +4,17 @@ import { modalActions, userActions } from '../../../_actions'
 import randomID from '../../../_helpers/uuid'
 
 import {
-	LoadingButton, Input, Grid, Button, IconButton, TableScroll, Table
+	LoadingButton, Input, Grid, Button, IconButton, TableScroll, Table, TFoot, ThreeDots
 } from '../../../_components'
-import NiceAvatar, { genConfig } from 'react-nice-avatar'
+
+import NiceAvatar from 'react-nice-avatar'
 
 
 
 export default function UsersTable(){
 	const users = useSelector(state => state.users.items)
+	const loading = useSelector(state => state.users.loading)
 	const dispatch = useDispatch()
-	const avtConfig = genConfig()
 
 
 	useEffect(()=>{
@@ -62,7 +63,7 @@ export default function UsersTable(){
 								return (
 									<tr key={randomID()}>
 										<td style={{textAlign: 'unset'}}>
-											<NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...avtConfig} />
+											<NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...user.avtConfig} />
 										</td>
 									    <td style={{textAlign: 'left'}}>{user.username}</td>
 									    <td style={{textAlign: 'left'}}>{user.email}</td>
@@ -88,6 +89,9 @@ export default function UsersTable(){
 						}
 					</tbody>
 				</Table>
+				<TFoot>
+					<ThreeDots show={loading}/>
+				</TFoot>
 			</TableScroll>
 		</div>
 	)

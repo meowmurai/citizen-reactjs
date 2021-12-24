@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { userActions, modalActions } from '../../_actions'
-
-import NiceAvatar, { genConfig } from 'react-nice-avatar'
-
 import {
-	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader
+	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader, CardContent, CardTitle
 } from '../../_components'
 
 import LocationsTable from '../_sections/locationsTable'
+import StatusTable from '../_sections/statusTable'
 
 
 import { 
@@ -38,7 +36,7 @@ export default function Locations(){
 				<Grid sm={12} md={8} lg={8}>
 					<Card>
 						<CardHeader >
-							<span style={{lineHeight: '100%',padding: "4px 0", marginRight: 'auto','overflow': 'hidden', flex: '1 1 0px'}}>Location Management</span>
+							<CardTitle style={{lineHeight: '100%', padding: "4px 0",flex: '1 1 0px'}}>Location Management</CardTitle>
 							
 							<Search 
 								className={searchPattern === '' ? 'collapse' : ''} 
@@ -52,11 +50,20 @@ export default function Locations(){
 								<span> add</span>
 							</Button>
 						</CardHeader>
-						<LocationsTable/>
+						<CardContent>
+							<LocationsTable/>
+						</CardContent>
 					</Card>
 				</Grid>
 				<Grid sm={12} md={4} lg={4}>
-
+					<Card>
+						<CardHeader>
+							<CardTitle>Tasks status</CardTitle>
+						</CardHeader>
+						<CardContent>
+							<StatusTable/>
+						</CardContent>
+					</Card>
 				</Grid>
 			</Row>
 		</Container>

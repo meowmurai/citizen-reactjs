@@ -6,7 +6,7 @@ import { userActions, modalActions } from '../../_actions'
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
 
 import {
-	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader
+	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader, CardTitle
 } from '../../_components'
 
 import UsersTable from '../_sections/usersTable'
@@ -40,9 +40,9 @@ export default function Users(){
 				<Row>
 					<Card>
 						<CardHeader >
-							<span style={{lineHeight: '100%',padding: "4px 0", marginRight: 'auto','overflow': 'hidden', flex: '1 1 0px'}}>
+							<CardTitle style={{lineHeight: '100%', padding: "4px 0",flex: '1 1 0px'}}>
 								Users Management
-							</span>
+							</CardTitle>
 							
 							<Search 
 								className={searchPattern === '' ? 'collapse' : ''} 

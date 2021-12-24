@@ -20,7 +20,7 @@ export const Table = styled.table`
   		width: 100%;
   	}
   	th,td{
-  		border-bottom: 2px solid ${props => props.theme.palete.backColor};
+  		border-bottom: ${props => props.noBorder ? 'none' : `2px solid ${props.theme.palete.backColor}`};
   		padding: 8px;
   		text-align: left;
   	}
@@ -47,3 +47,12 @@ export const Table = styled.table`
 	  	}
   	}
 `
+export const TFoot = styled.div`
+	background-color: ${props => props.theme.palete.secondary.lighter};
+	border-bottom: 2px solid ${props => props.theme.palete.backColor};
+	padding: 8px;
+	min-height: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+` 

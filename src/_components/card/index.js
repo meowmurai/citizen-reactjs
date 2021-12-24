@@ -20,3 +20,10 @@ export const CardHeader = styled.div`
 		padding: 0.75rem 1rem;
 	}
 `
+export const CardContent = styled.div`
+	position: relative;
+` 
+export const CardTitle = styled.span`
+	marginRight: auto;
+	overflow: hidden;
+`

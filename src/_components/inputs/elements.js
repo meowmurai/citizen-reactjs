@@ -56,13 +56,14 @@ export const SearchIcon = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 1.5rem;
+	font-size: 1.15rem;
 	color: ${props => props.theme.palete.primary.main};
 	
 	cursor: pointer;
 	opacity: 0.8;
 	&:hover{
 		opacity: 1;
+		font-size: 1.25rem;
 	}
 	&:active {
 		opacity: 0.9;

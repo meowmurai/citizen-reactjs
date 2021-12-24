@@ -16,6 +16,7 @@ export default function AddUserForm({show, payload, ...rest}){
 	const locations = useSelector(state => state.locations.items)
 	const account = useSelector(state => state.authentication.user)
 
+	const roles = {A0: [{name: 'A1', code: 'A1'}], A1: [{name: 'A2', code: 'A2'}], A2: [{name: 'A3', code: 'A3'}], A3: [{name: 'B1', code: 'B1'}], B1: [{name: 'B2', code: 'B2'}]}
 	const [manAvatar, setManAvatar] = useState(genConfig({sex: 'man'}))
 	const [womanAvatar, setWomanAvatar] = useState(genConfig({sex: 'woman'}))
 	const [gender, setGender] = useState(true)
@@ -23,11 +24,10 @@ export default function AddUserForm({show, payload, ...rest}){
 		username: '',
 		email: '',
 		location_code: `${payload ? payload.code : ''}`,
-		role: '',
+		role: roles[account.role][0].code,
 		password: ''
 	})	
 	const dispatch = useDispatch()
-	const roles = {A0: [{name: 'A1', code: 'A1'}], A1: [{name: 'A2', code: 'A2'}], A2: [{name: 'A3', code: 'A3'}], A3: [{name: 'B1', code: 'B1'}], B1: [{name: 'B2', code: 'B2'}]}
 	
 	useEffect(()=>{
 		if(!locations)
@@ -58,16 +58,20 @@ export default function AddUserForm({show, payload, ...rest}){
 				{/* <Grid container sm={12} md={6} lg={5} flexDirection='column'> */}
 				<Grid container flexDirection='column'>
 					<Row>
-						<Selector name='location_code' value={form.location_code} options={locations} onChange={handleChange} placeholder='Location'
-								style={{flexShrink: 1}}
+						<Selector 
+							name='location_code' value={form.location_code} 
+							options={locations} onChange={handleChange} 
+							placeholder='Location' style={{flexShrink: 1}}
+							disabled={payload && payload.isUpdate ? true : false}
 						/>
 						<Selector 
 							name='role' 
-							value={roles[account.role][0].code}
+							value={form.code}
 							options={roles[account.role]} 
 							onChange={handleChange} 
 							placeholder='Role'
 							style={{flexShrink: 2}}
+							disabled={payload && payload.isUpdate}
 						/>
 
 						{/* <span style={{display: 'inline-block'}}>
