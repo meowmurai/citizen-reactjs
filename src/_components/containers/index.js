@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const Grid = styled.div`
 	display: ${props => props.container ? 'flex' : 'block'};
 
-	padding: 4px 4px;
 
 	flex-wrap: ${props => props.wrap ? props.wrap : 'nowrap'};
 
@@ -14,15 +13,16 @@ export const Grid = styled.div`
 	flex-direction: ${props => props.flexDirection ? props.flexDirection : 'row'};
 
 	${props => ({...props.sx})};
+	flex-shrink: 0;
 	@media screen and (max-width: 768px){
 		padding: 0;
-		flex-basis: ${props => props.sm ? `${props.sm/12*100}%` : 'auto'};
+		width: ${props => props.sm ? `${props.sm/12*100}%` : 'auto'};
 	}
 	@media screen and (min-width: 768px){
-		flex-basis: ${props => props.md ? `${props.md/12*100}%` : 'auto'};
+		width: ${props => props.md ? `${props.md/12*100}%` : 'auto'};
 	}
 	@media screen and (min-width: 1280px){
-		flex-basis: ${props => props.lg ? `${props.lg/12*100}%` : 'auto'};
+		width: ${props => props.lg ? `${props.lg/12*100}%` : 'auto'};
 	}
 `
 

@@ -7,6 +7,7 @@ export const modalActions = {
     addLocation,
     updateLocation,
     addSchedule,
+    showInfo,
     close
 };
 
@@ -27,6 +28,9 @@ function updateLocation(form) {
 }
 function addSchedule(username) {
     return { type: modalConstants.SHOW_SCHEDULE, payload: {username: username}};
+}
+function showInfo(info) {
+    return { type: modalConstants.SHOW_INFO, payload: info};
 }
 function close() {
     return { type: modalConstants.CLOSE_ALL };

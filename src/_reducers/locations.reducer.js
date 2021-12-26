@@ -1,17 +1,22 @@
-import { userConstants } from '../_constants';
+import { locationConstants } from '../_constants';
 
 export function locations(state = {}, action) {
   switch (action.type) {
-    case userConstants.GETCHILDLOCATIONS_REQUEST:
+    case locationConstants.LOCATIONS_UPDATE:
+      return {
+        ...state,
+        items: action.payload.locations
+      }
+    case locationConstants.GETCHILDLOCATIONS_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case userConstants.GETCHILDLOCATIONS_SUCCESS:
+    case locationConstants.GETCHILDLOCATIONS_SUCCESS:
       return {
         items: action.locations
       };
-    case userConstants.GETCHILDLOCATIONS_FAILURE:
+    case locationConstants.GETCHILDLOCATIONS_FAILURE:
       return {
         ...state,
         error: action.error

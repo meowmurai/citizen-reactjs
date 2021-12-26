@@ -24,12 +24,16 @@ export default function UsersTable(){
 
 	const handleLock = (username) => {
 		dispatch(userActions.setActivate(username, false, () => {
-			dispatch(userActions.getChildsUser())
+			//dispatch(userActions.getChildsUser())
+			let newUsers = users.map(user => user.username !== username ? user : {...user, active: false})
+			dispatch(userActions.update(newUsers))
 		}))
 	}
 	const handleUnlock = (username) => {
 		dispatch(userActions.setActivate(username, true, () => {
-			dispatch(userActions.getChildsUser())
+			//dispatch(userActions.getChildsUser())
+			let newUsers = users.map(user => user.username !== username ? user : {...user, active: true})
+			dispatch(userActions.update(newUsers))
 		}))
 	}
 	const handleSchedule = (username) => {
@@ -38,7 +42,9 @@ export default function UsersTable(){
 	const HandleDelete = (username) => {
 		if(window.confirm(`you can just lock this user. Do you still want delete ${username}?`)){
 			dispatch(userActions.del(username, () => {
-				dispatch(userActions.getChildsUser())
+				//dispatch(userActions.getChildsUser())
+				let newUsers = users.filter(user => user.username !== username)
+				dispatch(userActions.update(newUsers))
 			}))
 		}
 	}
@@ -58,32 +64,31 @@ export default function UsersTable(){
 						</tr>
 					</thead>
 					<tbody>
-						{users && 
-							users.slice(1).map(user =>{
-								return (
-									<tr key={randomID()}>
-										<td style={{textAlign: 'unset'}}>
-											<NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...user.avtConfig} />
-										</td>
-									    <td style={{textAlign: 'left'}}>{user.username}</td>
-									    <td style={{textAlign: 'left'}}>{user.email}</td>
-									    <td>{user.manage_location}</td>
-									    <td>{user.role}</td>
-									    <td>{user.active ? <span style={{color: 'green'}}>active</span> : 
-									    					<span style={{color: 'red'}}>blocked</span>}
-									    </td>
-									    <td>
-									    	<span style={{'whiteSpace': 'nowrap'}}>
-									    		{user.active ? 
-									    			<IconButton onClick={()=>handleLock(user.username)}><i className="fas fa-lock"></i></IconButton>
-									    			:
-									    			<IconButton onClick={()=>handleUnlock(user.username)}><i className="fas fa-lock-open"></i></IconButton>
-									    		}
-										    	<IconButton onClick={()=>handleSchedule(user.username)}><i className="fas fa-calendar-plus"></i></IconButton>
-										    	<IconButton onClick={()=>HandleDelete(user.username)}><i className="far fa-trash-alt"></i></IconButton>
-										    </span>
-									    </td>
-									</tr>
+						{users?.slice().map(user =>{
+							return (
+								<tr key={randomID()}>
+									<td style={{textAlign: 'unset'}}>
+										<NiceAvatar style={{ width: '2.5rem', height: '2.5rem' }} {...user.avtConfig} />
+									</td>
+									<td style={{textAlign: 'left'}}>{user.username}</td>
+									<td style={{textAlign: 'left'}}>{user.email}</td>
+									<td>{user.manage_location}</td>
+									<td>{user.role}</td>
+									<td>{user.active ? <span style={{color: 'green'}}>active</span> : 
+														<span style={{color: 'gray'}}>not active</span>}
+									</td>
+									<td>
+										<span style={{'whiteSpace': 'nowrap'}}>
+											{user.active ? 
+												<IconButton onClick={()=>handleLock(user.username)}><i className="fas fa-lock"></i></IconButton>
+												:
+												<IconButton onClick={()=>handleUnlock(user.username)}><i className="fas fa-lock-open"></i></IconButton>
+											}
+											<IconButton onClick={()=>handleSchedule(user.username)}><i className="fas fa-calendar-plus"></i></IconButton>
+											<IconButton onClick={()=>HandleDelete(user.username)}><i className="far fa-trash-alt"></i></IconButton>
+										</span>
+									</td>
+								</tr>
 								)
 							})
 						}

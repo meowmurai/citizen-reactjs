@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 
@@ -9,6 +7,25 @@ export const Button = ({variant, children, ...rest}) => {
 			{variant === 'contained' ? 	<ContainedButton {...rest}><ChildWrapper>{children}</ChildWrapper></ContainedButton> : 
 			 variant === 'outlined' ? 	<OutlinedButton {...rest}><ChildWrapper>{children}</ChildWrapper></OutlinedButton> :
 			 							<TextButton {...rest}><ChildWrapper>{children}</ChildWrapper></TextButton> 
+			}
+		</>
+	)
+}
+export const LoadingButton = ({variant, loading, children, ...rest}) => {
+	return (
+		<>
+			{variant === 'contained' ? 	<ContainedButton {...rest} disabled={loading}>
+											{children }
+											{loading ? <i className="fa-spin fas fa-circle-notch" style={{'margin-left': '4px'}}/>: ''}
+										</ContainedButton> : 
+			 variant === 'outlined' ? 	<OutlinedButton {...rest}>
+			 								{children}
+											{loading ? <i className="fa-spin fas fa-circle-notch" style={{'margin-left': '4px'}}/>: ''}
+			 							</OutlinedButton> :
+			 							<TextButton {...rest}>
+			 								{children}
+											{loading ? <i className="fa-spin fas fa-circle-notch" style={{'margin-left': '4px'}}/>: ''}
+			 							</TextButton> 
 			}
 		</>
 	)
@@ -97,23 +114,5 @@ export const IconButton = styled(StyledButton)`
 		opacity: 1;
 	}
 `
-export const LoadingButton = ({variant, loading, children, ...rest}) => {
-	return (
-		<>
-			{variant === 'contained' ? 	<ContainedButton {...rest} disabled={loading}>
-											{children }
-											{loading ? <i className="fa-spin fas fa-circle-notch" style={{'margin-left': '4px'}}/>: ''}
-										</ContainedButton> : 
-			 variant === 'outlined' ? 	<OutlinedButton {...rest}>
-			 								{children}
-											{loading ? <i className="fa-spin fas fa-circle-notch" style={{'margin-left': '4px'}}/>: ''}
-			 							</OutlinedButton> :
-			 							<TextButton {...rest}>
-			 								{children}
-											{loading ? <i className="fa-spin fas fa-circle-notch" style={{'margin-left': '4px'}}/>: ''}
-			 							</TextButton> 
-			}
-		</>
-	)
-}
+
 

@@ -3,31 +3,33 @@ import styled from 'styled-components'
 
 import randomID from '../../_helpers/uuid'
 
-export const Selector = ({options=[], width, value, disabled, onChange, placeholder, name, ...rest}) => {
+export const Selector = ({options=[], width, value, disabled,onClick=()=>{}, onChange, placeholder, name, ...rest}) => {
     const [active, setActive] = useState(false)
     const [show, setShow] = useState(false)
-    const [_value, setValue] = useState(value)
+    const [selected, setSelected] = useState(value)
 
-    const handleClick = () =>{
+    const handleClick = (e) =>{
+        onClick(e)
         if(disabled) return;
         setActive(preactive => !preactive)
         setShow(preshow => !preshow)
+        
     }
     const handleFocusOut = () => {
         setActive(false)
         setShow(false)
     }
     const handleSelect = (selectedValue, e) =>{
-        if(_value !== selectedValue){
+        if(selected?.code !== selectedValue.code){
             onChange({
                 ...e,
                 target: {
                     ...e.target,
                     name: name,
-                    value: selectedValue
+                    value: selectedValue.code
                 }
             })
-            setValue(selectedValue)
+            setSelected(selectedValue)
         }
     }
     return (
@@ -40,7 +42,7 @@ export const Selector = ({options=[], width, value, disabled, onChange, placehol
             {...rest}>
 
             <Select>
-                <span>{_value ? _value : placeholder}</span>
+                <span>{selected?.name ? selected.name : placeholder}</span>
                 <i className="fa fa-chevron-left"></i>
             </Select>
             <input type="hidden" name="gender"/>
@@ -48,7 +50,7 @@ export const Selector = ({options=[], width, value, disabled, onChange, placehol
                 className={`${show ? 'show': ''}`}>
                 {options.map(option => {
                     return (
-                        <li key={randomID()} onClick={(e)=>handleSelect(option.code, e)}>{option.name}</li>
+                        <li key={randomID()} onClick={(e)=>handleSelect(option, e)}>{option.name}</li>
                     )
                 })}
             </DropDownMenu>
@@ -74,7 +76,7 @@ const Select = styled.div`
 const DropDown = styled.div`
     min-width: 100px;
     width: ${props => props.width ? props.width : '100%'};
-    margin: 4px; 
+    height: 2.8rem;
     padding: 2px 4px;
     display: inline-block;
     background-color: #fff;
