@@ -91,6 +91,7 @@ const Navbar = () => {
 				<NavMenu show={menuToggle}>
 					<NavItem><NavLink to='/home/users'>Users</NavLink></NavItem>
 					<NavItem><NavLink to='/home/locations'>Locations</NavLink></NavItem>
+					<NavItem><NavLink to='/home/analytics'>Analytics</NavLink></NavItem>
 					<NavItem><NavLink to='/account'>Account</NavLink></NavItem>
 				</NavMenu>
 			</Nav>
