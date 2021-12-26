@@ -71,8 +71,9 @@ const FormWrapper = styled.div`
 `
 
 export const Row = styled.div`
-	flex: 1 0 100%;
+	flex-basis: 100%;
 	margin: 10px;
+	margin-bottom: 1.2rem;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;

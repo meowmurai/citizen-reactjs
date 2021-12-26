@@ -1,5 +1,6 @@
 export * from './alert.constants';
 export * from './user.constants';
+export * from './location.constants';
 export * from './modal.constants';
 export * from './task.constants';
 export const env={
@@ -7,5 +8,5 @@ export const env={
 	apiUrl: 'https://citizen5-spl.herokuapp.com/api/v1',
 	userApiUrl: 'https://citizen5-spl.herokuapp.com/api/v1/user',
 	LocationApiUrl: 'https://citizen5-spl.herokuapp.com/api/v1/location',
-	SurveyApiUrl: 'https://citizen5-spl.herokuapp.com/api/v1/survey'
+	SurveyApiUrl: 'https://citizen5-spl.herokuapp.com/api/v1/survey',
 }

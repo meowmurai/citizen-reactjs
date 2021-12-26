@@ -10,9 +10,13 @@ import Users from './views/users'
 import Locations from './views/locations'
 import Analytics from './views/analytics'
 import Notification from './views/notification'
+import Survey from './views/survey'
+
 import OverlayProvider from './views/overlay'
 import ModalProvider from './views/modal'
 
+import {RoleProtected} from './routing'
+import {AuthenticationProvider} from './routing'
 
 function App() {
     
@@ -25,15 +29,24 @@ function App() {
                 <OverlayProvider />
                 <Notification/>
                 <ModalProvider/>
-                <Header/>
-                <Routes>
-                    <Route path='/' element={<Landing/>}/>
-                    <Route path='/home'>
-                        <Route path='/home/users' element={<Users/>}/>
-                        <Route path='/home/locations' element={<Locations/>}/>
-                        <Route path='/home/analytics' element={<Analytics/>}/>
-                    </Route>
-                </Routes>
+                <AuthenticationProvider>
+                    <Header/>
+                    <Routes>
+                        <Route path='/' element={<Users/>}/>
+                        <Route path='/home'>
+                            <Route path='/home/users' element={<Users/>}/>
+                            <Route path='/home/locations' element={<Locations/>}/>
+                            <Route path='/home/analytics' element={<Analytics/>}/>
+                            <Route 
+                                path='/home/survey' 
+                                element={
+                                <RoleProtected roleAccepted={["B1", "B2"]}>
+                                    <Survey/>
+                                </RoleProtected>}   
+                            />
+                        </Route>
+                    </Routes>
+                </AuthenticationProvider>
             </Router>
            </ThemeProvider>
         </div>

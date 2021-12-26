@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { userActions, modalActions } from '../../_actions'
-
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
-
 import {
-	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader, CardTitle
+	Grid, LoadingButton, Button, IconButton, Input, Search, Card, CardHeader, CardTitle, CardContent
 } from '../../_components'
 
 import UsersTable from '../_sections/usersTable'
@@ -15,8 +12,8 @@ import UsersTable from '../_sections/usersTable'
 import { 
 	Container,
 	Title,
-	Row,
-} from './elements'
+	RowLayout,
+} from '../_shareComponents'
 
 
 export default function Users(){
@@ -30,6 +27,9 @@ export default function Users(){
 			console.log(e.target.value)
 		}
 	}
+	/**
+	 * 
+	 */
 	const handleAdd = ()=>{
 		dispatch(modalActions.addUser())
 	}
@@ -37,7 +37,7 @@ export default function Users(){
 		<>
 			<Container>
 				<Title>Users</Title>
-				<Row>
+				<RowLayout>
 					<Card>
 						<CardHeader >
 							<CardTitle style={{lineHeight: '100%', padding: "4px 0",flex: '1 1 0px'}}>
@@ -49,16 +49,19 @@ export default function Users(){
 								onKeyDown={handleEnter} 
 								onChange={(e)=>setSearchPattern(e.target.value)} 
 								placeholder='type to search'
+								containerSX={{marginRight: '1rem'}}
 							/>
-							<div style={{flex: '0 1 1rem'}}/>
 							<Button variant='contained' onClick={handleAdd}>
 								<i className="fal fa-plus"></i>
 								<span> add</span>
 							</Button>
 						</CardHeader>
-						<UsersTable/>
+						<CardContent>
+							<UsersTable/>
+						</CardContent>
+						
 					</Card>
-				</Row>
+				</RowLayout>
 			</Container>
 		</>
 	)

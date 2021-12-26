@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react'
 import { useDispatch, useSelector  } from 'react-redux'
 
 import {
-	ModalForm, Title, Row, Input, InputDate, LoadingButton, Grid, Selector, Toggle, Checkbox
+	ModalForm, Title, Row, Input, InputDateRange, LoadingButton, Grid, Selector, Toggle, Checkbox
 } from '../../_components'
 import { userActions } from '../../_actions'
 
@@ -38,7 +38,7 @@ export default function AddSchedule({show, payload, ...rest}){
 				<Title>Create schedule</Title>
 			</Row>
 			<Row style={{'justifyContent': 'center','flex-wrap': 'wrap'}}>
-				<InputDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
+				<InputDateRange startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
 			</Row>
 			<Row style={{marginRight: 'auto'}}>
 					<Checkbox checked={checked} onChange={handleCheckboxChange}>

@@ -1,7 +1,30 @@
 import { taskConstants } from '../_constants';
 
-export function tasks(state = {status: {}}, action) {
+export function tasks(state = {survey: {}, status: {}}, action) {
   switch (action.type) {
+    case taskConstants.GET_SURVEYS_REQUEST:
+      return {
+        ...state,
+        survey: {
+          loading: true,
+        }
+      };
+    case taskConstants.GET_SURVEYS_SUCCESS:
+      return {
+        ...state,
+        survey: {
+          loading: false,
+          data: action.data
+        }
+      };
+    case taskConstants.GET_SURVEYS_FAILURE:
+      return {
+        ...state,
+        survey: {
+          error: action.error
+        }
+      };
+
     case taskConstants.GET_STATUS_REQUEST:
       return {
         ...state,

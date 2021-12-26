@@ -129,15 +129,17 @@ export const Empty = styled.div`
 export const AvatarContainer = styled.div`
 	position: relative;
 	display: flex;
+	align-items: center;
 `
 export const DropDown = styled.div`
 	display: ${props => props.show ? 'inline-block' : 'none'};
 	position: absolute;
 	top: 60px;
+	width: 100px;
 	border-radius: 5px;
 	background-color: #fff;
 	color: #000;
-	transform: translate(-10%,0);
+	transform: translate(-25%,0);
 	z-index: 1;
 	&:before{
 		content: '';

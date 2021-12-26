@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const TableScroll = styled.div`
 	position: relative;
-	height: 600px;
+	max-height: 600px;
 	overflow: auto;
+	width: 100%;
 `
 
 

@@ -15,10 +15,10 @@ export default function StatusTable(){
 
 
 	useEffect(()=>{
-		console.log(data)
 		if(!data)
 			dispatch(taskActions.getTaskStatus())
 	}, [])
+
 
 	return (
 		<TableScroll>
@@ -31,11 +31,18 @@ export default function StatusTable(){
 					</tr>
 				</thead>
 				<tbody>
-					{data && data.child_users.map( child => {
+					{data?.child_users?.map( child => {
+						let endDate = new Date(parseInt(child.survey_time.end_time)*1000)
+						console.log(endDate)
 						return (
 							<tr key={randomID()}>
 								<td>{child.username}</td>
-								<td>{child.survey_time ? new Date(child.survey_time.end_time): ''}</td>
+								<td>
+									{("0" + endDate.getDate()).slice(-2)}/
+									{("0" + (endDate.getMonth() + 1)).slice(-2)}/
+									{endDate.getFullYear()}
+									
+								</td>
 								<td>
 									{child.is_finish ? 
 										<span style={{color: 'green'}}>finished</span> :
