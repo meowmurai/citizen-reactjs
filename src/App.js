@@ -17,6 +17,7 @@ import ModalProvider from './views/modal'
 
 import {RoleProtected} from './routing'
 import {AuthenticationProvider} from './routing'
+import Footer from './views/footer';
 
 function App() {
     
@@ -46,6 +47,7 @@ function App() {
                             />
                         </Route>
                     </Routes>
+                    <Footer/>
                 </AuthenticationProvider>
             </Router>
            </ThemeProvider>
