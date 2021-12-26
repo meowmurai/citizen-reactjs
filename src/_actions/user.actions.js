@@ -1,4 +1,4 @@
-import { userConstants } from '../_constants';
+import { locationConstants, userConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { validateEmail } from '../_helpers';
@@ -7,11 +7,11 @@ export const userActions = {
     login,
     logout,
     create,
+    update,
     setActivate,
     addSchedule,
     del,
-    getChildsUser,
-    getChildsAll
+    getChildsUser
 };
 
 function login(username, password, onSuccess) {
@@ -42,7 +42,9 @@ function logout() {
     userService.logout();
     return { type: userConstants.LOGOUT };
 }
-
+function update(users) {
+    return { type: userConstants.USERS_UPDATE, payload: {users: users}}
+}
 function create(form, onSuccess=()=>{}) {
     return dispatch => {
         const {username, email, password, location_code, role, avtConfig} = {...form}
@@ -121,21 +123,7 @@ function getChildsUser() {
     function success(users) { return { type: userConstants.GETCHILDS_SUCCESS, users } }
     function failure(error) { return { type: userConstants.GETCHILDS_FAILURE, error } }
 }
-function getChildsAll() {
-    return dispatch => {
-        dispatch(request())
 
-        userService.getChildsAll()
-            .then(
-                locations => dispatch(success(locations)),
-                error => dispatch(failure(error))
-            )
-    }
-
-    function request() { return { type: userConstants.GETCHILDLOCATIONS_REQUEST } }
-    function success(locations) { return { type: userConstants.GETCHILDLOCATIONS_SUCCESS, locations } }
-    function failure(error) { return { type: userConstants.GETCHILDLOCATIONS_FAILURE, error } }
-}
 function addSchedule(username, start_time, end_time, onSuccess, onFail) {
     return dispatch => {
         userService.addSchedule(username, (start_time.getTime()/1000).toString(), (end_time.getTime()/1000).toString())

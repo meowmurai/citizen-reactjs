@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { userActions, modalActions } from '../../_actions'
 
 import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLink, Empty, AvatarContainer, DropDown, DropDownItem} from './elements'
-import {Button, LoadingButton} from '../buttons'
-import {Input, Search} from '../inputs'
+import { Grid, Button, LoadingButton, Input, Search } from '../index'
 import {FaBars} from 'react-icons/fa'
 
 import NiceAvatar from 'react-nice-avatar'
@@ -69,13 +68,21 @@ const Navbar = () => {
 					<AvatarContainer>
 						{ authState.user && !authState.loading ?
 							<>
-								<NavLink to='#' onClick={avtHandleClick}>
+								<Grid container flexDirection="column">
+									<span style={{marginRight: '8px'}}>{authState.user.username}</span>	
+									{authState.user.active ? 
+										<span style={{color: 'green', fontSize: '0.75rem'}}>active</span> : 
+										<span style={{color: 'gray',fontWeight: 'bold', fontSize: '0.75rem'}}>not active</span>
+									}
+								</Grid>
+								
+								<NavLink to='#' onClick={avtHandleClick} style={{marginRight: '8px'}}>
 									<NiceAvatar style={{ width: '3rem', height: '3rem' }} {...authState.user.avtConfig} />
 								</NavLink>
-								<DropDown show={dropDown}>
-									<DropDownItem><NavLink to='#' style={{margin: '0 auto'}}>setting</NavLink></DropDownItem>
+								{/* <DropDown show={dropDown}>
+									<DropDownItem><NavLink to='#' >setting</NavLink></DropDownItem>
 									<DropDownItem><NavLink to='/' onClick={logout}>Logout</NavLink></DropDownItem>
-								</DropDown>
+								</DropDown> */}
 							</>
 							:
 							<>
@@ -91,7 +98,10 @@ const Navbar = () => {
 				<NavMenu show={menuToggle}>
 					<NavItem><NavLink to='/home/users'>Users</NavLink></NavItem>
 					<NavItem><NavLink to='/home/locations'>Locations</NavLink></NavItem>
+					<NavItem><NavLink to='/home/analytics'>Analytics</NavLink></NavItem>
 					<NavItem><NavLink to='/account'>Account</NavLink></NavItem>
+					{['B1','B2'].includes(authState?.user?.role) ? <NavItem><NavLink to='/home/survey'>Survey</NavLink></NavItem> : <></>}
+					{authState?.user ? <NavItem><NavLink to='/' onClick={logout}>Logout</NavLink></NavItem> : <></>}
 				</NavMenu>
 			</Nav>
 		</>

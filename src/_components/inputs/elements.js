@@ -11,7 +11,7 @@ export const InputContainer = styled.div`
 
 export const StyledInput = styled.input`
 	width: 100%;
-	height: 2.5rem;
+	height: 2.8rem;
 	padding: 10px 8px 8px 8px;
 	border: 1px solid #808080;
 	border-radius: 10px;

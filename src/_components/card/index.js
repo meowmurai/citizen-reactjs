@@ -13,7 +13,9 @@ export const CardHeader = styled.div`
 	padding: 0.75rem 1.5rem;
 	font-weight: 500;
 
+	min-height: 4.2rem;
 	display: flex;
+	
 	justify-content: flex-start;
 	align-items: center;
 	@media screen and (max-width: 768px){
@@ -22,6 +24,10 @@ export const CardHeader = styled.div`
 `
 export const CardContent = styled.div`
 	position: relative;
+	background-color: ${props => props.theme.palete.secondary.lighter};
+	@media screen and (max-width: 768px){
+		padding: 0.75rem 1rem;
+	}
 ` 
 export const CardTitle = styled.span`
 	marginRight: auto;

@@ -1,6 +1,6 @@
 import { alertConstants } from '../_constants';
 
-export const alert = (state = [{id:'1',type: 'alert-danger', message:"hello, world"},{id:'2',type: 'alert-success', message:"hello, world"}], action) => {
+export const alert = (state = [], action) => {
   switch (action.type) {
     case alertConstants.SUCCESS:
       return [...state,{

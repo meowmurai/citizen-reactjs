@@ -1,9 +1,24 @@
 import {env} from '../_constants';
 import { authHeader } from '../_helpers';
+import { handleResponse } from '.';
 
 export const locationService = {
     create,
+    getChildsLocation,
+    getLocation
 };
+
+function getLocation(code) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`${env.LocationApiUrl}/${code}/childs`, requestOptions)
+        .then(handleResponse)
+        .then(messages => {
+            return messages;
+        });
+}
 
 function create(name, code) {
     const requestOptions = {
@@ -18,20 +33,15 @@ function create(name, code) {
             return messages;
         });
 }
+function getChildsLocation() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                //window.location.reload(true);
-            }
-
-            const error = (data && data.details) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data.messages;
-    });
+    return fetch(`${env.userApiUrl}/childs/all`, requestOptions)
+            .then(handleResponse)
+            .then(messages => {
+                return messages.data
+            })
 }

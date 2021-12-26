@@ -1,19 +1,27 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
 
-export const Checkbox = ({ className, checked, children, ...props }) => (
-    <label>
-        <CheckboxContainer className={className}>
-        <HiddenCheckbox checked={checked} {...props} />
-        <StyledCheckbox checked={checked}>
-            <Icon viewBox="0 0 24 24">
-            <polyline points="20 6 9 17 4 12" />
-            </Icon>
-        </StyledCheckbox>
-        </CheckboxContainer>
-        <span style={{ margin: 8, fontSize: '0.8rem', fontWeight: 'lighter' }}>{children}</span>
-    </label>
-  )
+export const Checkbox = ({ className, onChange, ...props }) => {
+  const [checked, setChecked] = useState(false)
+  const handleChange = (e) => {
+    setChecked(e.target.checked)
+    console.log('check')
+    onChange(e)
+  }
+  return (
+      <label>
+          <CheckboxContainer className={className}>
+          <HiddenCheckbox checked={checked} {...props} />
+          <StyledCheckbox checked={checked}>
+              <Icon viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+              </Icon>
+          </StyledCheckbox>
+          </CheckboxContainer>
+      </label>
+    )
+}
   
 const CheckboxContainer = styled.div`
   display: inline-block;

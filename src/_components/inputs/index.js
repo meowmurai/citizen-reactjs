@@ -7,7 +7,7 @@ import {
 export * from './searchField'
 export * from './datePicker'
 
-export const Input = ({label, name, value, onChange, containerSX, inputSX, ...rest}) => {
+export const Input = ({label, name, value, onChange, containerSX, inputSX, message, ...rest}) => {
 
 	return (
 		<>

@@ -5,7 +5,7 @@ import { useDispatch, useSelector  } from 'react-redux'
 import {
 	ModalForm, Title, Row, Input, InputDate, LoadingButton, Grid, Selector, Toggle
 } from '../../_components'
-import { modalActions, userActions } from '../../_actions'
+import { locationActions, modalActions, userActions } from '../../_actions'
 
 
 import NiceAvatar, { genConfig } from 'react-nice-avatar'
@@ -31,7 +31,7 @@ export default function AddUserForm({show, payload, ...rest}){
 	
 	useEffect(()=>{
 		if(!locations)
-			dispatch(userActions.getChildsAll())
+			dispatch(locationActions.getChildsLocation())
 			
 	}, [])
 
@@ -59,19 +59,18 @@ export default function AddUserForm({show, payload, ...rest}){
 				<Grid container flexDirection='column'>
 					<Row>
 						<Selector 
-							name='location_code' value={form.location_code} 
+							name='location_code' value={{name: form.location_code,code: form.location_code}} 
 							options={locations} onChange={handleChange} 
 							placeholder='Location' style={{flexShrink: 1}}
 							disabled={payload && payload.isUpdate ? true : false}
 						/>
 						<Selector 
 							name='role' 
-							value={form.code}
+							value={{name: form.code, code: form.code}}
 							options={roles[account.role]} 
 							onChange={handleChange} 
 							placeholder='Role'
 							style={{flexShrink: 2}}
-							disabled={payload && payload.isUpdate}
 						/>
 
 						{/* <span style={{display: 'inline-block'}}>

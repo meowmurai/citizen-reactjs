@@ -43,7 +43,9 @@ export const NotiItem = (props)=> {
 		}, 400)
 	}
 	return (
-		<NotiWrapper className={`${props.type} ${exit ? 'exit' : ''}`}>
+		<NotiWrapper className={`${props.type} ${exit ? 'exit' : ''}`}
+					onMouseEnter={handlePauseTimer}
+					onMouseLeave={handleStartTimer}>
 			<IconButton onClick={handleClose}><i className="fas fa-times-circle"></i></IconButton>
 			<p>{props.message}</p>
 			<Bar width={`${barWidth}%`} />
@@ -63,6 +65,8 @@ const NotiWrapper = styled.div`
 	border-radius: 5px;
 	overflow: hidden;
 	margin-bottom: 10px;
+	margin-left: auto ! important;
+	padding: 4px 24px 14px 8px;
 	box-shadow: 0 0 10px rgba(0,0,0, 0.3);
 
 	animation: 0.4s all ease-in-out;
@@ -76,9 +80,21 @@ const NotiWrapper = styled.div`
 		color: ${props => props.theme.palete.secondary.main};
 	}
 	& > p{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		margin: 0;
-		padding: 4px 8px;
 		color: ${props => props.theme.palete.secondary.main};
+	}
+	&:hover{
+		width: auto;
+		min-width: 150px;
+		max-width: 90vw;
+	}
+	&:hover > p {
+		white-space: unset;
+		overflow: unset;
+		text-overflow: unset;
 	}
 
 	&.alert-success {
@@ -110,6 +126,9 @@ const NotiWrapper = styled.div`
 	}
 `
 const Bar = styled.div`
+	position: absolute;
+	left: 0;
+	bottom: 0;
 	height: 10px;
 	width: ${props => props.width};
 	background-color: #000;
