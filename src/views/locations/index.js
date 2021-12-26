@@ -56,14 +56,14 @@ export default function Locations(){
 					</Card>
 				</Grid>
 				<Grid sm={12} md={4} lg={4}>
-					<Card>
+					{/* <Card>
 						<CardHeader>
 							<CardTitle>Tasks status</CardTitle>
 						</CardHeader>
 						<CardContent>
 							<StatusTable/>
 						</CardContent>
-					</Card>
+					</Card> */}
 				</Grid>
 			</Row>
 		</Container>

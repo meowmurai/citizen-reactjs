@@ -8,9 +8,12 @@ import Header from './views/header'
 import Landing from './views/landing'
 import Users from './views/users'
 import Locations from './views/locations'
+import Analytics from './views/analytics'
 import Notification from './views/notification'
 import OverlayProvider from './views/overlay'
 import ModalProvider from './views/modal'
+
+
 function App() {
     
 
@@ -28,6 +31,7 @@ function App() {
                     <Route path='/home'>
                         <Route path='/home/users' element={<Users/>}/>
                         <Route path='/home/locations' element={<Locations/>}/>
+                        <Route path='/home/analytics' element={<Analytics/>}/>
                     </Route>
                 </Routes>
             </Router>

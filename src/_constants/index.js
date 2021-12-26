@@ -7,4 +7,5 @@ export const env={
 	apiUrl: 'https://citizen5-spl.herokuapp.com/api/v1',
 	userApiUrl: 'https://citizen5-spl.herokuapp.com/api/v1/user',
 	LocationApiUrl: 'https://citizen5-spl.herokuapp.com/api/v1/location',
+	SurveyApiUrl: 'https://citizen5-spl.herokuapp.com/api/v1/survey'
 }
